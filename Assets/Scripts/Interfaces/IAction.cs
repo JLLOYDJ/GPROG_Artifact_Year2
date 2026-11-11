@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IAction
 {
-    void MoveTime(bool isAction);
+    bool MoveTime(bool isAction);
 }
