@@ -4,16 +4,16 @@ using UnityEngine;
 public abstract class BaseMove : IAction, IMove
 {
     // Reusable Data Classes
-    protected ID moveID = new ID();
-    protected CoreActionStats coreStats = new CoreActionStats();
-    protected CoreTypeStats coreType = new CoreTypeStats();
-    protected Level levelStats = new Level();
+    // (Originally had protected, but due to their getters and setters, they need to be public to be accessed)
+    public ID moveID = new ID();
+    public CoreActionStats coreStats = new CoreActionStats();
+    public CoreTypeStats coreType = new CoreTypeStats();
+    public Level levelStats = new Level();
 
     // Data Specific to Moves
     private byte _ppCurrent = 0;
     private byte _ppMax = 0;
     private byte _movePower = Convert.ToByte(movePower.none);
-    private byte[,] _diceLevelIncrease = new byte[Level.maximumLevel, 2];
 
     // Getter/Setters
     public byte GetPPCurrent()
@@ -25,7 +25,6 @@ public abstract class BaseMove : IAction, IMove
     {
         _ppCurrent = newPPCurrent;
     }
-
     public void ReducePPCurrent()
     {
         _ppCurrent--;
@@ -38,7 +37,14 @@ public abstract class BaseMove : IAction, IMove
     {
         _ppMax = newPPMax;
     }
-    //Put the rest here later.
+    public byte GetMovePower()
+    {
+        return _movePower;
+    }
+    public void SetMovePower(byte newMovePower)
+    {
+        _movePower = newMovePower;
+    }
 
     // Methods from Interfaces
     public abstract void Activate();

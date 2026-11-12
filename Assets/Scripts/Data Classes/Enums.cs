@@ -55,4 +55,18 @@ public enum movePower
     wisdom = 5,
     charisma = 6
 }
-
+public enum monsterSize
+{
+    tiny = 0,
+    small = 1,
+    medium = 2,
+    large = 3, 
+    huge = 4, 
+    gargantuan = 5
+}
+public enum DiceAdvantage
+{
+    normal = 0,
+    disadvantage = 1,
+    advantage = 2
+}

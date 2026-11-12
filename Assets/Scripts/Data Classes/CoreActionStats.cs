@@ -5,7 +5,7 @@ public class CoreActionStats
 {
     private uint _duration = 0;
     private uint _range = 0;
-    private byte _target = Convert.ToByte(Target.self);
+    private int _target = Convert.ToInt32(Target.self); // Originally byte, however, it only goes to 255, doesn't do minuses.
     private bool _isAction = false; // False = BonusAction, True = Action
 
     public uint GetDuration()
@@ -28,12 +28,12 @@ public class CoreActionStats
         _range = newRange;
     }
 
-    public byte GetTarget()
+    public int GetTarget()
     {
         return _target;
     }
 
-    public void SetTarget(byte newTarget)
+    public void SetTarget(int newTarget)
     {
         _target = newTarget;
     }
