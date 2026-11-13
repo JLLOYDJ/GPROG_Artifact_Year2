@@ -8,26 +8,26 @@ public class MoveIndex
 {
     // Reason for it not working is due to not being in an function/Awake
     // I love this dictionary!
-    private Dictionary<uint, BaseMove> MoveDictionary = new Dictionary<uint, BaseMove>();
+    private Dictionary<string, BaseMove> MoveDictionary = new Dictionary<string, BaseMove>();
     // Using a Traditional Constructor as it will be ready when the game is ready.
     public MoveIndex()
     {
-        MoveDictionary.Add(0, new Struggle());
-        MoveDictionary.Add(1, new Tackle());
-        MoveDictionary.Add(2, new Growl());
-        MoveDictionary.Add(3, new WorkUp());
-        MoveDictionary.Add(4, new Thundershock());
-        MoveDictionary.Add(5, new BulletPunch());
+        MoveDictionary.Add("Struggle", new Struggle());
+        MoveDictionary.Add("Tackle", new Tackle());
+        MoveDictionary.Add("Growl", new Growl());
+        MoveDictionary.Add("Work Up", new WorkUp());
+        MoveDictionary.Add("Thunder Shock", new Thundershock());
+        MoveDictionary.Add("Bullet Punch", new BulletPunch());
     }
     
-    public BaseMove IDMoveReturn(uint idNumber)
+    public BaseMove IDMoveReturn(string moveName)
     {
-        bool isValid = MoveDictionary.ContainsKey(idNumber);
+        bool isValid = MoveDictionary.ContainsKey(moveName);
         if (isValid)
         {
             Debug.Log("Move Found");
             BaseMove NewMove;
-            bool testing = MoveDictionary.TryGetValue(idNumber, out NewMove);
+            MoveDictionary.TryGetValue(moveName, out NewMove);
             Debug.Log(NewMove.moveID.GetName());
             return NewMove;
         }

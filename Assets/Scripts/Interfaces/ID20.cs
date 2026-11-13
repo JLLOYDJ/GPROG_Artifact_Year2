@@ -9,5 +9,5 @@ public interface ID20
     /// <param name="_Modifier"></param>
     /// <param name="_Buff"></param>
     /// <param name="_Advantage"></param>
-    byte D20Roll(byte _Modifier, byte _Buff, byte _Advantage, out byte _originalResult);
+    byte D20Roll(int _Modifier, int _Buff, byte _Advantage, out byte _originalResult);
 }

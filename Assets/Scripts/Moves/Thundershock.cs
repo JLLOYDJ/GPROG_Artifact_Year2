@@ -18,13 +18,13 @@ public class Thundershock : BaseMove
         coreStats.SetRange(20);
         coreStats.SetTarget(Convert.ToByte(Target.enemy));
         coreType.SetPokemonType(Convert.ToByte(PokemonTypes.electric));
-        SetPPMax(15);
-        SetPPCurrent(GetPPMax());
+        powerPoints.SetPPMax(15);
+        powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(Convert.ToByte(movePower.dexterity));
         diceLevel.SetAllLevelDice(1, 6, 1, 12, 2, 8, 4, 6);
     }
 
-    public override void Activate()
+    public override void Activate(BasePokemon User)
     {
         // Checks if Action has been used, if not continue
         // checks for PP first and does PPFail if there is nothing

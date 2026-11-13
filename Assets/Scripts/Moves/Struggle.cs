@@ -18,12 +18,12 @@ public class Struggle : BaseMove
         coreStats.SetTarget(Convert.ToByte(Target.enemy));
         coreType.SetPokemonType(Convert.ToByte(PokemonTypes.typeless));
         // Doesn't need Level Increasing due to Struggle being basic
-        SetPPCurrent(0);
-        SetPPMax(0);
+        powerPoints.SetPPMax(0);
+        powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(Convert.ToByte(movePower.dexterity));
     }
 
-    public override void Activate()
+    public override void Activate(BasePokemon User)
     {
         // Grabs Singleton Manager, passes through player and opponent
         // Does a 20 roll with modifiers

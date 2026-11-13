@@ -18,12 +18,12 @@ public class WorkUp : BaseMove
         coreStats.SetTarget(Convert.ToByte(Target.self));
         coreType.SetPokemonType(Convert.ToByte(PokemonTypes.normal));
         // Doesn't need Level Increasing due to being a modifier
-        SetPPMax(3);
-        SetPPCurrent(GetPPMax());
+        powerPoints.SetPPMax(3);
+        powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(Convert.ToByte(movePower.none));
     }
 
-    public override void Activate()
+    public override void Activate(BasePokemon User)
     {
         // Checks if Bonus Action has been used, if not continue
         // checks for PP first and does PPFail if there is nothing

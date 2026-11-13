@@ -17,12 +17,12 @@ public class Growl : BaseMove
         coreStats.SetTarget(Convert.ToByte(Target.enemy));
         coreType.SetPokemonType(Convert.ToByte(PokemonTypes.normal));
         // Doesn't need Level Increasing due to being a modifier
-        SetPPMax(20);
-        SetPPCurrent(GetPPMax());
+        powerPoints.SetPPMax(20);
+        powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(Convert.ToByte(movePower.charisma));
     }
 
-    public override void Activate()
+    public override void Activate(BasePokemon User)
     {
         // Checks if Action has been used, if not continue
         // checks for PP first and does PPFail if there is nothing

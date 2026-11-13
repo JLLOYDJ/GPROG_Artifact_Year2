@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface ISaveThrow
 {
-    void SavingThrow(byte Modifier, byte buff);
+    byte SavingThrowCal(int Modifier, int buff, byte proficiencyBonus);
 }

@@ -20,13 +20,13 @@ public class BulletPunch : BaseMove
         coreStats.SetRange(10);
         coreStats.SetTarget(Convert.ToByte(Target.enemy));
         coreType.SetPokemonType(Convert.ToByte(PokemonTypes.steel));
-        SetPPMax(15);
-        SetPPCurrent(GetPPMax());
+        powerPoints.SetPPMax(15);
+        powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(Convert.ToByte(movePower.dexterity));
         diceLevel.SetAllLevelDice(1, 4, 1, 6, 1, 10, 1, 12);
     }
 
-    public override void Activate()
+    public override void Activate(BasePokemon User)
     {
         // Checks if Bonus Action has been used, if not continue
         // checks for PP first and does PPFail if there is nothing

@@ -11,32 +11,9 @@ public abstract class BaseMove : IAction, IMove
     public Level levelStats = new Level();
 
     // Data Specific to Moves
-    private byte _ppCurrent = 0;
-    private byte _ppMax = 0;
+    public PP powerPoints = new PP();
+
     private byte _movePower = Convert.ToByte(movePower.none);
-
-    // Getter/Setters
-    public byte GetPPCurrent()
-    {
-        return _ppCurrent;
-    }
-
-    public void SetPPCurrent(byte newPPCurrent)
-    {
-        _ppCurrent = newPPCurrent;
-    }
-    public void ReducePPCurrent()
-    {
-        _ppCurrent--;
-    }
-    public byte GetPPMax()
-    {
-        return _ppMax;
-    }
-    public void SetPPMax(byte newPPMax)
-    {
-        _ppMax = newPPMax;
-    }
     public byte GetMovePower()
     {
         return _movePower;
@@ -47,10 +24,10 @@ public abstract class BaseMove : IAction, IMove
     }
 
     // Methods from Interfaces
-    public abstract void Activate();
-    public bool PPCheck(byte PPcurrent)
+    public abstract void Activate(BasePokemon User);
+    public bool PPCheck()
     {
-        if (PPcurrent == 0)
+        if (powerPoints.GetPPCurrent() == 0)
         {
             PPFail();
             return false;
@@ -63,6 +40,7 @@ public abstract class BaseMove : IAction, IMove
     }
     public void PPFail()
     {
+
         // Due to not having the rest of the code yet, this will have a debug log.
         // The goal will to go to the manager, and ask it to check if the other moves have PP left, if not, it would trigger stuggle.
         Debug.Log("Calling Manager to check if any PP is left");

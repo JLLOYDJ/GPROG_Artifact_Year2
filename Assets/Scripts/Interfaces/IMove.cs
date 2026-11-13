@@ -2,8 +2,8 @@ using UnityEngine;
 
 public interface IMove
 {
-    void Activate();
+    void Activate(BasePokemon User);
     // Originally had PPMax, but doesn't need that as it is to check if it is above 0, if so, the move can work.
-    bool PPCheck(byte PPcurrent);
+    bool PPCheck();
     void PPFail();
 }

@@ -17,14 +17,67 @@ public class Tackle : BaseMove
         coreStats.SetRange(5);
         coreStats.SetTarget(Convert.ToByte(Target.enemy));
         coreType.SetPokemonType(Convert.ToByte(PokemonTypes.normal));
-        SetPPMax(20);
-        SetPPCurrent(GetPPMax());
+        powerPoints.SetPPMax(20);
+        powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(Convert.ToByte(movePower.strength));
         diceLevel.SetAllLevelDice(1, 6, 1, 10, 2, 8, 5, 4);
     }
 
-    public override void Activate()
+    public override void Activate(BasePokemon User)
     {
+        Debug.Log("ACTIVATED!");
+        
+        bool IsAction = User.actionResources.GetAction();
+        Debug.Log(IsAction);
+        if (IsAction)
+        {
+            bool _isMoveAvailable = PPCheck();
+            if (_isMoveAvailable)
+            {
+                powerPoints.ReducePPCurrent();
+                User.actionResources.ActivateAction();
+                byte originalRoll;
+                byte newRoll;
+                newRoll = User.D20Roll(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
+                    User.buffDebuff.GetCurrentModifiedAttack(), 
+                    Convert.ToByte(DiceAdvantage.normal), 
+                    out originalRoll);
+                bool doesHit = GameManager.GameInstance.ACTest(User, newRoll);
+                if (doesHit)
+                {
+                    Debug.Log("HITS!");
+                    byte currentLevel = User.level.GetCurrentLevel();
+                    byte diceAmount = diceLevel.GetDiceAmount(currentLevel);
+                    byte diceSize = diceLevel.GetDiceSize(currentLevel);
+                    byte diceRoll = 0;
+                    for (int i = 0; i < diceAmount; i++)
+                    {
+                        diceRoll += Convert.ToByte(UnityEngine.Random.Range(1, (diceAmount + 1)));
+                    }
+                    Convert.ToByte(diceAmount * diceSize);
+                    uint damageAmount = (Convert.ToUInt32(diceRoll + User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower()))));
+                    if (originalRoll == 20)
+                    {
+                        damageAmount += diceRoll; // Doubling Dice Roll
+                    }
+                    if (User.mainType.GetPokemonType() == coreType.GetPokemonType() || User.subType.GetPokemonType() == coreType.GetPokemonType())
+                    {
+                        // Saving doing another convert.
+                        damageAmount *= 15;
+                        damageAmount /= 10;
+                    }
+                    GameManager.GameInstance.DamageOther(damageAmount, User, coreType.GetPokemonType());
+                }
+                else
+                {
+                    Debug.Log("UI Here, Update to show it missed");
+                }
+            }
+            else
+            {
+                return;
+            }
+        }    
         // Checks if Action has been used, if not continue
         // checks for PP first and does PPFail if there is nothing
         // Grabs Singleton Manager, passes through player and opponent

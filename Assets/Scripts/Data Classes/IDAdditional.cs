@@ -38,7 +38,7 @@ public class IDAdditional
     {
         return _sr;
     }
-    public void SetCurrentHP(float newSR)
+    public void SetCurrentSR(float newSR)
     {
         _sr = newSR;
     }
