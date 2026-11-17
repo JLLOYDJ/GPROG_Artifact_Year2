@@ -18,11 +18,11 @@ public class BulletPunch : BaseMove
         coreStats.SetAction(false);
         coreStats.SetDuration(0);
         coreStats.SetRange(10);
-        coreStats.SetTarget(Convert.ToByte(Target.enemy));
-        coreType.SetPokemonType(Convert.ToByte(PokemonTypes.steel));
+        coreStats.SetTarget(Target.enemy);
+        coreType.SetPokemonType(PokemonTypes.steel);
         powerPoints.SetPPMax(15);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
-        SetMovePower(Convert.ToByte(movePower.dexterity));
+        SetMovePower(movePower.dexterity);
         diceLevel.SetAllLevelDice(1, 4, 1, 6, 1, 10, 1, 12);
     }
 

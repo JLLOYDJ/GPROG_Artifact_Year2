@@ -55,6 +55,7 @@ public enum movePower
     wisdom = 5,
     charisma = 6
 }
+// Used for the Size of Each Pokemon (Tiny ETC)
 public enum monsterSize
 {
     tiny = 0,
@@ -64,6 +65,7 @@ public enum monsterSize
     huge = 4, 
     gargantuan = 5
 }
+// Used for Dice Advantage and Disadvantage.
 public enum DiceAdvantage
 {
     normal = 0,

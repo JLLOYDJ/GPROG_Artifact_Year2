@@ -15,12 +15,12 @@ public class WorkUp : BaseMove
         coreStats.SetAction(false);
         coreStats.SetDuration(10);
         coreStats.SetRange(0);
-        coreStats.SetTarget(Convert.ToByte(Target.self));
-        coreType.SetPokemonType(Convert.ToByte(PokemonTypes.normal));
+        coreStats.SetTarget(Target.self);
+        coreType.SetPokemonType(PokemonTypes.normal);
         // Doesn't need Level Increasing due to being a modifier
         powerPoints.SetPPMax(3);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
-        SetMovePower(Convert.ToByte(movePower.none));
+        SetMovePower(movePower.none);
     }
 
     public override void Activate(BasePokemon User)

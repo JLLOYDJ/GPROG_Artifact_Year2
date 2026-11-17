@@ -5,7 +5,8 @@ public class CoreActionStats
 {
     private uint _duration = 0;
     private uint _range = 0;
-    private int _target = Convert.ToInt32(Target.self); // Originally byte, however, it only goes to 255, doesn't do minuses.
+    // Originally a byte, but as found out, you can use the enum itself for this as the variable type.
+    private Target _target = Target.self; 
     private bool _isAction = false; // False = BonusAction, True = Action
 
     public uint GetDuration()
@@ -28,12 +29,12 @@ public class CoreActionStats
         _range = newRange;
     }
 
-    public int GetTarget()
+    public Target GetTarget()
     {
         return _target;
     }
 
-    public void SetTarget(int newTarget)
+    public void SetTarget(Target newTarget)
     {
         _target = newTarget;
     }

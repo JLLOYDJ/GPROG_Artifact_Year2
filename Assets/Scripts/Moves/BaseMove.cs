@@ -13,12 +13,12 @@ public abstract class BaseMove : IAction, IMove
     // Data Specific to Moves
     public PP powerPoints = new PP();
 
-    private byte _movePower = Convert.ToByte(movePower.none);
-    public byte GetMovePower()
+    private movePower _movePower = movePower.none;
+    public movePower GetMovePower()
     {
         return _movePower;
     }
-    public void SetMovePower(byte newMovePower)
+    public void SetMovePower(movePower newMovePower)
     {
         _movePower = newMovePower;
     }

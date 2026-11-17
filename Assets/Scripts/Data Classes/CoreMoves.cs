@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CoreMoves
 {
-    private static uint _amountOfCurrentMoves = 4; // Forgot to set it.
+    private static byte _amountOfCurrentMoves = 4; // Forgot to set it.
     private BaseMove[] _currentMoves = new BaseMove[_amountOfCurrentMoves];
     // Other ones such as Past, Future, and Technical Machines are not needed in this technical showcase.
     public BaseMove GetCurrentMove(uint currentMoveIndex)

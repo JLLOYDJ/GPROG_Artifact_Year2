@@ -15,11 +15,11 @@ public class Tackle : BaseMove
         coreStats.SetAction(true);
         coreStats.SetDuration(0);
         coreStats.SetRange(5);
-        coreStats.SetTarget(Convert.ToByte(Target.enemy));
-        coreType.SetPokemonType(Convert.ToByte(PokemonTypes.normal));
+        coreStats.SetTarget(Target.enemy);
+        coreType.SetPokemonType(PokemonTypes.normal);
         powerPoints.SetPPMax(20);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
-        SetMovePower(Convert.ToByte(movePower.strength));
+        SetMovePower(movePower.strength);
         diceLevel.SetAllLevelDice(1, 6, 1, 10, 2, 8, 5, 4);
     }
 
@@ -40,7 +40,7 @@ public class Tackle : BaseMove
                 byte newRoll;
                 newRoll = User.D20Roll(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
                     User.buffDebuff.GetCurrentModifiedAttack(), 
-                    Convert.ToByte(DiceAdvantage.normal), 
+                    DiceAdvantage.normal, 
                     out originalRoll);
                 bool doesHit = GameManager.GameInstance.ACTest(User, newRoll);
                 if (doesHit)

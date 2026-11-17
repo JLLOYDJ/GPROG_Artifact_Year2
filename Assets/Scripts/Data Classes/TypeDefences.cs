@@ -4,42 +4,42 @@ using UnityEngine;
 
 public class TypeDefences
 {
-    private List<Byte> _weaknesses = new List<Byte>();
-    private List<Byte> _resistences = new List<Byte>();
-    private List<Byte> _immunities = new List<Byte>();
-    public List<Byte> GetWeaknesses()
+    private List<PokemonTypes> _weaknesses = new List<PokemonTypes>();
+    private List<PokemonTypes> _resistences = new List<PokemonTypes>();
+    private List<PokemonTypes> _immunities = new List<PokemonTypes>();
+    public List<PokemonTypes> GetWeaknesses()
     {
         return _weaknesses;
     }
-    public List<Byte> GetResistences()
+    public List<PokemonTypes> GetResistences()
     {
         return _resistences;
     }
-    public List<Byte> GetImmunities()
+    public List<PokemonTypes> GetImmunities()
     {
         return _immunities;
     }
-    public void AddWeakness(byte typeWeakness)
+    public void AddWeakness(PokemonTypes typeWeakness)
     {
         _weaknesses.Add(typeWeakness);
     }
-    public void AddResistence(byte typeResistence)
+    public void AddResistence(PokemonTypes typeResistence)
     {
         _resistences.Add(typeResistence);
     }
-    public void AddImmunities(byte typeImmunity)
+    public void AddImmunities(PokemonTypes typeImmunity)
     {
         _immunities.Add(typeImmunity);
     }
-    public void RemoveWeakness(byte typeWeakness)
+    public void RemoveWeakness(PokemonTypes typeWeakness)
     {
         _weaknesses.Remove(typeWeakness);
     }
-    public void RemoveResistence(byte typeResistence)
+    public void RemoveResistence(PokemonTypes typeResistence)
     {
         _resistences.Remove(typeResistence);
     }
-    public void RemoveImmunities(byte typeImmunities)
+    public void RemoveImmunities(PokemonTypes typeImmunities)
     {
         _immunities.Remove(typeImmunities);
     }

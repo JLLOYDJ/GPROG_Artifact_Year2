@@ -14,12 +14,12 @@ public class Growl : BaseMove
         coreStats.SetAction(true);
         coreStats.SetDuration(10);
         coreStats.SetRange(100);
-        coreStats.SetTarget(Convert.ToByte(Target.enemy));
-        coreType.SetPokemonType(Convert.ToByte(PokemonTypes.normal));
+        coreStats.SetTarget(Target.enemy);
+        coreType.SetPokemonType(PokemonTypes.normal);
         // Doesn't need Level Increasing due to being a modifier
         powerPoints.SetPPMax(20);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
-        SetMovePower(Convert.ToByte(movePower.charisma));
+        SetMovePower(movePower.charisma);
     }
 
     public override void Activate(BasePokemon User)

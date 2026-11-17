@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DamageOther(uint amount, BasePokemon attacker, byte moveType)
+    public void DamageOther(uint amount, BasePokemon attacker, PokemonTypes moveType)
     {
         if (attacker == PlayerPokemon)
         {

@@ -40,11 +40,11 @@ public abstract class BasePokemon : ID20, ISaveThrow // Put interfaces in later 
         _frontViewString = newPath;
     }
 
-    public byte D20Roll(int _modifier, int _buff, byte _advantage, out byte _originalRoll)
+    public byte D20Roll(int _modifier, int _buff, DiceAdvantage _advantage, out byte _originalRoll)
     {
         int result;
         // This rolls between 1 and 20 for the dice roll. 
-        if (_advantage == Convert.ToByte(DiceAdvantage.advantage))
+        if (_advantage == DiceAdvantage.advantage)
         {
             int d20_1 = UnityEngine.Random.Range(1, 21);
             int d20_2 = UnityEngine.Random.Range(1, 21);
@@ -59,7 +59,7 @@ public abstract class BasePokemon : ID20, ISaveThrow // Put interfaces in later 
                 _originalRoll = Convert.ToByte(d20_2);
             }
         }
-        else if (_advantage == Convert.ToByte(DiceAdvantage.disadvantage))
+        else if (_advantage == DiceAdvantage.disadvantage)
         {
             int d20_1 = UnityEngine.Random.Range(1, 21);
             int d20_2 = UnityEngine.Random.Range(1, 21);

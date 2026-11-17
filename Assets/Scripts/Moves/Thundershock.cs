@@ -16,11 +16,11 @@ public class Thundershock : BaseMove
         coreStats.SetAction(true);
         coreStats.SetDuration(0);
         coreStats.SetRange(20);
-        coreStats.SetTarget(Convert.ToByte(Target.enemy));
-        coreType.SetPokemonType(Convert.ToByte(PokemonTypes.electric));
+        coreStats.SetTarget(Target.enemy);
+        coreType.SetPokemonType(PokemonTypes.electric);
         powerPoints.SetPPMax(15);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
-        SetMovePower(Convert.ToByte(movePower.dexterity));
+        SetMovePower(movePower.dexterity);
         diceLevel.SetAllLevelDice(1, 6, 1, 12, 2, 8, 4, 6);
     }
 

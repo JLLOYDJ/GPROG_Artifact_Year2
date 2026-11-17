@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ModifierArray
 {
+    // Made into int due to it being able to do into minuses.
     private int[] _modifierArray = new int[30];
     public ModifierArray()
     {

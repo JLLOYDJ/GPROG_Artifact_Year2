@@ -9,7 +9,7 @@ public class CoreMonsterStats : IHeal
     private byte[] _stats = new byte[6];
     // looking into circular lists, will add when everything else is fleshed out
     private byte _ac;
-    private byte _savingThrowPer;
+    private movePower _savingThrowPer;
 
     public uint GetCurrentHP()
     {
@@ -54,9 +54,9 @@ public class CoreMonsterStats : IHeal
             Debug.Log("Speed not Multiple of 5.");
         }
     }
-    public byte GetIndividualStat(byte movePower)
+    public byte GetIndividualStat(movePower movePower)
     {
-        return _stats[(movePower - 1)];
+        return _stats[(Convert.ToByte(movePower - 1))];
     }
     public void SetIndividualStat(byte newStat, byte movePower)
     {
@@ -88,11 +88,11 @@ public class CoreMonsterStats : IHeal
     {
         _ac = newAC;
     }
-    public byte GetSavingThrowPer()
+    public movePower GetSavingThrowPer()
     {
         return _savingThrowPer;
     }
-    public void SetSavingThrowPer(byte newSavingThrowPer)
+    public void SetSavingThrowPer(movePower newSavingThrowPer)
     {
         if (newSavingThrowPer == 0)
         {

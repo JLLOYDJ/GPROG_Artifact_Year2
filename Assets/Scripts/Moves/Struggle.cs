@@ -15,12 +15,12 @@ public class Struggle : BaseMove
         coreStats.SetAction(true);
         coreStats.SetDuration(0);
         coreStats.SetRange(60);
-        coreStats.SetTarget(Convert.ToByte(Target.enemy));
-        coreType.SetPokemonType(Convert.ToByte(PokemonTypes.typeless));
+        coreStats.SetTarget(Target.enemy);
+        coreType.SetPokemonType(PokemonTypes.typeless);
         // Doesn't need Level Increasing due to Struggle being basic
         powerPoints.SetPPMax(0);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
-        SetMovePower(Convert.ToByte(movePower.dexterity));
+        SetMovePower(movePower.dexterity);
     }
 
     public override void Activate(BasePokemon User)

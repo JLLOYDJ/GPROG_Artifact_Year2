@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class IDAdditional
 {
-    private byte _size;
+    private monsterSize _size;
     private bool _isMale;
     private string _nativeRegion;
     private float _sr;
-    public byte GetCurrentSize()
+    public monsterSize GetCurrentSize()
     {
         return _size;
     }
-    public void SetCurrentSize(byte newSize)
+    public void SetCurrentSize(monsterSize newSize)
     {
         _size = newSize;
     }

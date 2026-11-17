@@ -55,5 +55,8 @@ public class UIManager : MonoBehaviour
             GameManager.GameInstance.GetOpponentPokemon().GetRearView().height / 2));*/
     }
 
+    public void DiceRoll()
+    {
 
+    }
 }

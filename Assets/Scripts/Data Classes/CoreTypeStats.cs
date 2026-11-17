@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class CoreTypeStats
 {
-    private byte _type;
+    private PokemonTypes _type;
 
     // Using the method way of doing getters and setters as they are easier to make it clear as to how it works + allowing for extended flexibility in future.
-    public byte GetPokemonType()
+    public PokemonTypes GetPokemonType()
     {
         return _type;
     }
 
-    public void SetPokemonType(byte newType)
+    public void SetPokemonType(PokemonTypes newType)
     {
         _type = newType;
     }
