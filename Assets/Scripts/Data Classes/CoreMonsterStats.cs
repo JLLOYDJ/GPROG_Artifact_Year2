@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+[Serializable]
 public class CoreMonsterStats : IHeal
 {
     private uint _hp;

@@ -8,7 +8,7 @@ public class Riolu : BasePokemon
     // All the pokemon use the same functions and items so if the game was bigger and good for a template.
     // This would then be extremely useful if the game expanded from this tech demo to a full game
     // As the amount of classes being created would be unvisible to keep as subclasses. 
-    // So having an external directory would keep the originals and then the save system
+    // So having an external directory would keep the originals and then the save system (Momento)
     // would keep the individual Pokemon the player has due to them potentially being different
     // to the original template.
     public Riolu()

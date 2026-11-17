@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Growl : BaseMove
 {
+    private byte GrowlUses = 0;
     public Growl() // Converted from Awake to Constructor so it would compile before runtime.
     {
         moveID.SetName("Growl");
@@ -20,6 +21,8 @@ public class Growl : BaseMove
         powerPoints.SetPPMax(20);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(movePower.charisma);
+        SetMoveVariant(moveVariant.Debuff);
+
     }
 
     public override void Activate(BasePokemon User)
@@ -31,5 +34,58 @@ public class Growl : BaseMove
         // On fail, check if growl already succeeded before, if so, check if it is below 5.
         // If so, -1 upto -5 on the oppontent.
 
+        // Havent Implemented yet, but looking into making a reset for Growl when it has been past 10 rounds.
+        Debug.Log("ACTIVATED!");
+
+        bool IsAction = User.actionResources.GetAction();
+        Debug.Log(IsAction);
+        if (IsAction)
+        {
+            bool _isMoveAvailable = PPCheck();
+            if (_isMoveAvailable)
+            {
+                powerPoints.ReducePPCurrent();
+                User.actionResources.ActivateAction();
+                byte savingThrowOpponent;
+                byte opponentOriginalRoll;
+                if (User == GameManager.GameInstance.GetOpponentPokemon())
+                {
+                    savingThrowOpponent = GameManager.GameInstance.GetPlayerPokemon().D20Roll(GameManager.GameInstance.GetPlayerPokemon().coreStats.GetIndividualStat(GetMovePower()),
+                        GameManager.GameInstance.GetPlayerPokemon().buffDebuff.GetCurrentModifiedAttack(),
+                        DiceAdvantage.normal, out opponentOriginalRoll);
+                }
+                else
+                {
+                    savingThrowOpponent = GameManager.GameInstance.GetOpponentPokemon().D20Roll(GameManager.GameInstance.GetOpponentPokemon().coreStats.GetIndividualStat(GetMovePower()),
+                        GameManager.GameInstance.GetOpponentPokemon().buffDebuff.GetCurrentModifiedAttack(),
+                        DiceAdvantage.normal, out opponentOriginalRoll);
+                }
+                byte savingThrowDC = User.SavingThrowCal(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
+                    User.buffDebuff.GetCurrentModifiedAttack(),
+                    User.proficiencyBonus.GetProficiencyBonus());
+
+                if (savingThrowDC >= savingThrowOpponent && GrowlUses < 5)
+                {
+                    if (User == GameManager.GameInstance.GetOpponentPokemon())
+                    {
+                        GameManager.GameInstance.GetOpponentPokemon().buffDebuff.NewBuffDebuffAttack(-1, coreStats.GetDuration());
+                    }
+                    else
+                    {
+                        GameManager.GameInstance.GetPlayerPokemon().buffDebuff.NewBuffDebuffAttack(-1, coreStats.GetDuration());
+                    }
+                    GrowlUses += 1;
+                }
+                else if (savingThrowDC >= savingThrowOpponent && GrowlUses == 5)
+                {
+                    Debug.Log("Max of 5 active growls have been used.");
+                }
+                else
+                {
+                    Debug.Log("UI Here, Update to show it missed");
+                }
+
+            }
+        }
     }
 }

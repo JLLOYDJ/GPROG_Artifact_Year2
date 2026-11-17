@@ -1,8 +1,10 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
-
-public class ID
+[Serializable]
+public class ID 
 {
+
     // Doing underscores for Private variables as it is the naming convention in Microsoft's document.
     private string _name = "NO_NAME";
     private string _description = "NO_DESCRIPTION";

@@ -21,14 +21,45 @@ public class Struggle : BaseMove
         powerPoints.SetPPMax(0);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(movePower.dexterity);
+        SetMoveVariant(moveVariant.Attack);
     }
 
     public override void Activate(BasePokemon User)
     {
-        // Grabs Singleton Manager, passes through player and opponent
-        // Does a 20 roll with modifiers
-        // 2 + movePower for damage
-        // Doesn't increase damage from moves or items or ability
-        // No PP check as this is the if all else fails move.
+        Debug.Log("ACTIVATED!");
+
+        bool IsAction = User.actionResources.GetAction();
+        Debug.Log(IsAction);
+        if (IsAction)
+        {
+           User.actionResources.ActivateAction();
+           byte originalRoll;
+           byte newRoll;
+           newRoll = User.D20Roll(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
+           User.buffDebuff.GetCurrentModifiedAttack(), DiceAdvantage.normal, out originalRoll);
+           bool doesHit = GameManager.GameInstance.ACTest(User, newRoll);
+           if (doesHit)
+           {
+                int damageAmount = 2 + User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower()));
+                if (originalRoll == 20)
+                {
+                   damageAmount *= 2; // Doubling Dice Roll
+                }
+                GameManager.GameInstance.DamageOther(Convert.ToUInt32(damageAmount), User, coreType.GetPokemonType());
+           }
+           else
+           {
+              Debug.Log("UI Here, Update to show it missed");
+           }
+        }
+        else
+        {
+            return;
+        }
+            // Grabs Singleton Manager, passes through player and opponent
+            // Does a 20 roll with modifiers
+            // 2 + movePower for damage
+            // Doesn't increase damage from moves or items or ability
+            // No PP check as this is the if all else fails move.
     }
 }

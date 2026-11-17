@@ -72,3 +72,11 @@ public enum DiceAdvantage
     disadvantage = 1,
     advantage = 2
 }
+public enum moveVariant
+{
+    Attack = 0,
+    Healing = 1,
+    Buff = 2,
+    Debuff = 3,
+    Other = 4
+}

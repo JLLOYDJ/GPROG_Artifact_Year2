@@ -12,7 +12,6 @@ public abstract class BaseMove : IAction, IMove
 
     // Data Specific to Moves
     public PP powerPoints = new PP();
-
     private movePower _movePower = movePower.none;
     public movePower GetMovePower()
     {
@@ -22,6 +21,15 @@ public abstract class BaseMove : IAction, IMove
     {
         _movePower = newMovePower;
     }
+    private moveVariant _moveVariant;
+    public moveVariant GetMoveVariant()
+    {
+        return _moveVariant;
+    }
+    public void SetMoveVariant(moveVariant newVariant)
+    {
+        _moveVariant = newVariant;
+    }
 
     // Methods from Interfaces
     public abstract void Activate(BasePokemon User);
@@ -29,21 +37,13 @@ public abstract class BaseMove : IAction, IMove
     {
         if (powerPoints.GetPPCurrent() == 0)
         {
-            PPFail();
+            GameManager.GameInstance.PPFail();
             return false;
-            
         }
         else
         {
             return true;
         }
-    }
-    public void PPFail()
-    {
-
-        // Due to not having the rest of the code yet, this will have a debug log.
-        // The goal will to go to the manager, and ask it to check if the other moves have PP left, if not, it would trigger stuggle.
-        Debug.Log("Calling Manager to check if any PP is left");
     }
 
     public bool MoveTime(bool IsAction)

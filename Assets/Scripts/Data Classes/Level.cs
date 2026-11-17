@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+[Serializable]
 public class Level
 {
     private byte _minimumLevel = 1;

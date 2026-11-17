@@ -21,6 +21,7 @@ public class Tackle : BaseMove
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(movePower.strength);
         diceLevel.SetAllLevelDice(1, 6, 1, 10, 2, 8, 5, 4);
+        SetMoveVariant(moveVariant.Attack);
     }
 
     public override void Activate(BasePokemon User)
@@ -49,6 +50,7 @@ public class Tackle : BaseMove
                     byte currentLevel = User.level.GetCurrentLevel();
                     byte diceAmount = diceLevel.GetDiceAmount(currentLevel);
                     byte diceSize = diceLevel.GetDiceSize(currentLevel);
+                    Debug.Log(diceSize);
                     byte diceRoll = 0;
                     for (int i = 0; i < diceAmount; i++)
                     {

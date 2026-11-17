@@ -24,17 +24,71 @@ public class BulletPunch : BaseMove
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(movePower.dexterity);
         diceLevel.SetAllLevelDice(1, 4, 1, 6, 1, 10, 1, 12);
+        SetMoveVariant(moveVariant.Attack);
     }
 
     public override void Activate(BasePokemon User)
     {
-        // Checks if Bonus Action has been used, if not continue
-        // checks for PP first and does PPFail if there is nothing
-        // Grabs Singleton Manager, passes through player and opponent
-        // Does a 20 roll with modifiers
-        // checks level, and then finds dice amount and size
-        // rolls with modifers added.
-        // Goes to the Singleton Manager to pass the damage.
+        Debug.Log("ACTIVATED!");
 
+        bool IsAction = User.actionResources.GetBonusAction();
+        Debug.Log(IsAction);
+        if (IsAction)
+        {
+            bool _isMoveAvailable = PPCheck();
+            if (_isMoveAvailable)
+            {
+                powerPoints.ReducePPCurrent();
+                User.actionResources.ActivateBonusAction();
+                byte originalRoll;
+                byte newRoll;
+                newRoll = User.D20Roll(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
+                    User.buffDebuff.GetCurrentModifiedAttack(),
+                    DiceAdvantage.normal,
+                    out originalRoll);
+                bool doesHit = GameManager.GameInstance.ACTest(User, newRoll);
+                if (doesHit)
+                {
+                    Debug.Log("HITS!");
+                    byte currentLevel = User.level.GetCurrentLevel();
+                    byte diceAmount = diceLevel.GetDiceAmount(currentLevel);
+                    byte diceSize = diceLevel.GetDiceSize(currentLevel);
+                    byte diceRoll = 0;
+                    for (int i = 0; i < diceAmount; i++)
+                    {
+                        diceRoll += Convert.ToByte(UnityEngine.Random.Range(1, (diceAmount + 1)));
+                    }
+                    Convert.ToByte(diceAmount * diceSize);
+                    uint damageAmount = (Convert.ToUInt32(diceRoll + User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower()))));
+                    if (originalRoll == 20)
+                    {
+                        damageAmount += diceRoll; // Doubling Dice Roll
+                    }
+                    if (User.mainType.GetPokemonType() == coreType.GetPokemonType() || User.subType.GetPokemonType() == coreType.GetPokemonType())
+                    {
+                        // Saving doing another convert.
+                        damageAmount *= 15;
+                        damageAmount /= 10;
+                    }
+                    GameManager.GameInstance.DamageOther(damageAmount, User, coreType.GetPokemonType());
+                }
+                else
+                {
+                    Debug.Log("UI Here, Update to show it missed");
+                }
+            }
+            else
+            {
+                return;
+            }
+            // Checks if Bonus Action has been used, if not continue
+            // checks for PP first and does PPFail if there is nothing
+            // Grabs Singleton Manager, passes through player and opponent
+            // Does a 20 roll with modifiers
+            // checks level, and then finds dice amount and size
+            // rolls with modifers added.
+            // Goes to the Singleton Manager to pass the damage.
+
+        }
     }
 }

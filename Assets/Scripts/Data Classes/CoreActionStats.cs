@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+[Serializable]
 public class CoreActionStats
 {
     private uint _duration = 0;

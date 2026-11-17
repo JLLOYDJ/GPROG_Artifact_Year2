@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+[Serializable]
 public class BuffDebuff
 {
     private int _modifiedAmountAttack = 0;

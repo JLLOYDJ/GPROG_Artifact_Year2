@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+[Serializable]
 public class ActionBonusAction
 {
     private bool _actionAvailable = true;

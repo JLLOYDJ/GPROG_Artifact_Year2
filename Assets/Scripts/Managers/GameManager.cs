@@ -1,5 +1,6 @@
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static TurnManager TurnInstance;
     private BasePokemon PlayerPokemon;
     private BasePokemon OpponentPokemon;
+    public static OpponentStateManager EnemyAIState = new OpponentStateManager();
 
     // Mediator Section
 
@@ -35,8 +37,7 @@ public class GameManager : MonoBehaviour
         // Same as before, doing this for the Turn Manager
         if (TurnInstance == null)
         {
-            TurnInstance = new GameObject("TurnManager").AddComponent<TurnManager>();
-            DontDestroyOnLoad(TurnInstance);
+            TurnInstance = new TurnManager();
         }
         // Randomises which Pokemon Player Gets (Only 2 for this Artifact)
         // If I did the External Data, I would have used a builder as it would work best.
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         int pokemon = Random.Range(0, 2);
         if (pokemon == 0)
         {
+            // Can Make into Game Objects if needed in future due to them now being monoBehaviour.
             PlayerPokemon = new Pikachu();
             OpponentPokemon = new Riolu();
         }
@@ -61,12 +63,6 @@ public class GameManager : MonoBehaviour
         PlayerPokemon.moveSet.GetCurrentMove(0).Activate(PlayerPokemon);
         TurnInstance.BeginBattle(PlayerPokemon, OpponentPokemon);
         Debug.Log(TurnInstance.CheckTurn());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /// <summary>
@@ -87,8 +83,44 @@ public class GameManager : MonoBehaviour
         return OpponentPokemon;
     }
 
-    public void PPTest(BasePokemon checkingPokemon)
+    public bool PPTest(BasePokemon checkingPokemon)
     {
+        byte remainingPP = 0;
+        remainingPP += checkingPokemon.moveSet.GetCurrentMove(1).powerPoints.GetPPCurrent();
+        remainingPP += checkingPokemon.moveSet.GetCurrentMove(2).powerPoints.GetPPCurrent();
+        remainingPP += checkingPokemon.moveSet.GetCurrentMove(3).powerPoints.GetPPCurrent();
+        remainingPP += checkingPokemon.moveSet.GetCurrentMove(4).powerPoints.GetPPCurrent();
+
+        if (remainingPP == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    public void PPFail()
+    {
+        BasePokemon currentUser = TurnInstance.CheckTurn();
+        bool _struggleTime = false;
+        if (currentUser == PlayerPokemon)
+        {
+            _struggleTime = PPTest(PlayerPokemon);
+            if (_struggleTime == true)
+            {
+                PlayerPokemon.moveSet.GetCurrentMove(0).Activate(PlayerPokemon);
+            }
+        }
+        else
+        {
+            _struggleTime = PPTest(OpponentPokemon);
+            if (_struggleTime == true)
+            {
+                Debug.Log("StruggleTime");
+                OpponentPokemon.moveSet.GetCurrentMove(0).Activate(OpponentPokemon);
+            }
+        }
 
     }
 
@@ -162,5 +194,14 @@ public class GameManager : MonoBehaviour
             PlayerPokemon.coreStats.HPDamage(amount);
             Debug.Log(amount + "To Enemy");
         }
+    }
+    public void NextTurnDebug()
+    {
+        Debug.Log("Test");
+        TurnInstance.FinishTurn();
+    }
+    public void EndGame()
+    {
+
     }
 }

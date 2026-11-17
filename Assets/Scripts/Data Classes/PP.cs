@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+[Serializable]
 public class PP
 {
     private byte _ppCurrent = 0;

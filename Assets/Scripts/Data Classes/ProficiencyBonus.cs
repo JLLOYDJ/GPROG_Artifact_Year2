@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+[Serializable]
 public class ProficiencyBonus
 {
     // Hard Coded for this project, but will be adjusted if developed past this.

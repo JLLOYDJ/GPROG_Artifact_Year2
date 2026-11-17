@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnManager : MonoBehaviour, ID20
+public class TurnManager : ID20
 {
     // Creating the queue that takes the Pokemon's reference and 
     private Queue <BasePokemon> TurnOrder = new Queue<BasePokemon>();
@@ -21,6 +21,23 @@ public class TurnManager : MonoBehaviour, ID20
     {
         AddTurn(CheckTurn());
         TurnOrder.Dequeue();
+        StartTurn();
+    }
+
+    public void StartTurn()
+    {
+        if (CheckTurn() == GameManager.GameInstance.GetPlayerPokemon())
+        {
+            GameManager.EnemyAIState.ChangeState(new OpponentIdleState());
+            GameManager.GameInstance.GetPlayerPokemon().actionResources.NewTurnReset();
+            // Opponent Turn ended and begin player turn.
+        }
+        else
+        {
+            GameManager.GameInstance.GetOpponentPokemon().actionResources.NewTurnReset();
+            GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
+            // Activate Opponent's State
+        }
     }
 
     public void BeginBattle(BasePokemon playerPokemon, BasePokemon opponentPokemon)
@@ -32,11 +49,13 @@ public class TurnManager : MonoBehaviour, ID20
         {
             AddTurn(playerPokemon);
             AddTurn(opponentPokemon);
+            GameManager.EnemyAIState.ChangeState(new OpponentIdleState());
         }
         else if (opponentRoll > playerRoll)
         {
             AddTurn(opponentPokemon);
             AddTurn(playerPokemon);
+            GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
         }
         else
         {
@@ -44,11 +63,13 @@ public class TurnManager : MonoBehaviour, ID20
             {
                 AddTurn(playerPokemon);
                 AddTurn(opponentPokemon);
+                GameManager.EnemyAIState.ChangeState(new OpponentIdleState());
             }
             else
             {
                 AddTurn(opponentPokemon);
                 AddTurn(playerPokemon);
+                GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
             }
         }
     }

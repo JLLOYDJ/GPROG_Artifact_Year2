@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class WorkUp : BaseMove
 {
+    private bool _isActive = false;
     public WorkUp() // Converted from Awake to Constructor so it would compile before runtime.
     {
         moveID.SetName("Work Up");
@@ -21,6 +22,7 @@ public class WorkUp : BaseMove
         powerPoints.SetPPMax(3);
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(movePower.none);
+        SetMoveVariant(moveVariant.Buff);
     }
 
     public override void Activate(BasePokemon User)
@@ -30,6 +32,31 @@ public class WorkUp : BaseMove
         // Grabs Singleton Manager, passes through player and opponent
         // Add +2 to modifier, if player doesn't attack, it ends.
         // Add timer to buff (Maybe list or Dictonary for keeping track of these).
+
+        Debug.Log("ACTIVATED!");
+
+        bool IsAction = User.actionResources.GetBonusAction();
+        Debug.Log(IsAction);
+        if (IsAction)
+        {
+            bool _isMoveAvailable = PPCheck();
+            if (_isMoveAvailable)
+            {
+                powerPoints.ReducePPCurrent();
+                User.actionResources.ActivateBonusAction();
+                if (_isActive == false)
+                {
+                    _isActive = true;
+                    User.buffDebuff.NewBuffDebuffAttack(2, coreStats.GetDuration());
+                }
+                else
+                {
+                    Debug.Log("Work_UpAlreadyActive!");
+                }
+            }
+            else
+                return;
+        }
 
     }
 }

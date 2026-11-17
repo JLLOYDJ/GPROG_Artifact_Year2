@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 /// <summary>
 /// Used for adding damage or healing dice that changes as levels increase.
 /// </summary>
+[Serializable]
 public class DiceLevelIncrease
 {
     private byte[,] _diceLevelIncrease = new byte[Level.maximumLevel, 2];

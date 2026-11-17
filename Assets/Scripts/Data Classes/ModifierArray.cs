@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+[Serializable]
 public class ModifierArray
 {
     // Made into int due to it being able to do into minuses.

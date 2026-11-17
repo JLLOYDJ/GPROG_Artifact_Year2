@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+[Serializable]
 public class TypeDefences
 {
     private List<PokemonTypes> _weaknesses = new List<PokemonTypes>();

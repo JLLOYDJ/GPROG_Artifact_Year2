@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+[Serializable]
 public class IDAdditional
 {
     private monsterSize _size;
