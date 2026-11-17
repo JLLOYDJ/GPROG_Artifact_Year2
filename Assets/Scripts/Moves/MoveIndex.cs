@@ -25,15 +25,12 @@ public class MoveIndex
         bool isValid = MoveDictionary.ContainsKey(moveName);
         if (isValid)
         {
-            Debug.Log("Move Found");
             BaseMove NewMove;
             MoveDictionary.TryGetValue(moveName, out NewMove);
-            Debug.Log(NewMove.moveID.GetName());
             return NewMove;
         }
         else
         {
-            Debug.Log("Invalid ID, Defaulting to Struggle");
             return new Struggle();
         }
     }

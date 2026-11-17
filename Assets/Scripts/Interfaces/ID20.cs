@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public interface ID20
@@ -9,5 +10,5 @@ public interface ID20
     /// <param name="_Modifier"></param>
     /// <param name="_Buff"></param>
     /// <param name="_Advantage"></param>
-    byte D20Roll(int _Modifier, int _Buff, DiceAdvantage _Advantage, out byte _originalResult);
+    byte D20Roll(int _Modifier, int _Buff, DiceAdvantage _Advantage,out byte _originalResult);
 }

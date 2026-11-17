@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager GameInstance;
     public static UIManager UIInstance;
     public static MoveIndex currentMoveIndex = new MoveIndex();
+    public static TurnManager TurnInstance;
     private BasePokemon PlayerPokemon;
     private BasePokemon OpponentPokemon;
 
@@ -31,7 +32,12 @@ public class GameManager : MonoBehaviour
             UIInstance = new GameObject("UIManager").AddComponent<UIManager>();
             DontDestroyOnLoad(UIInstance);
         }
-        
+        // Same as before, doing this for the Turn Manager
+        if (TurnInstance == null)
+        {
+            TurnInstance = new GameObject("TurnManager").AddComponent<TurnManager>();
+            DontDestroyOnLoad(TurnInstance);
+        }
         // Randomises which Pokemon Player Gets (Only 2 for this Artifact)
         // If I did the External Data, I would have used a builder as it would work best.
         // It wouldn't need multiple subclasses to ensure it passes through correctly.
@@ -53,6 +59,8 @@ public class GameManager : MonoBehaviour
         NewMove("Tackle");
         PlayerPokemon.moveSet.GetCurrentMove(3);
         PlayerPokemon.moveSet.GetCurrentMove(0).Activate(PlayerPokemon);
+        TurnInstance.BeginBattle(PlayerPokemon, OpponentPokemon);
+        Debug.Log(TurnInstance.CheckTurn());
     }
 
     // Update is called once per frame
