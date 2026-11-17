@@ -21,23 +21,23 @@ public abstract class BasePokemon : ID20, ISaveThrow // Put interfaces in later 
     public ModifierArray modifierArray = new ModifierArray();
     public ProficiencyBonus proficiencyBonus = new ProficiencyBonus();
     public TypeDefences typeDefences = new TypeDefences();
-    private Texture2D _rearView;
-    private Texture2D _frontView;
-    public Texture2D GetRearView()
+    private String _rearViewString;
+    private String _frontViewString;
+    public String GetRearString()
     {
-        return _rearView;
+        return _rearViewString;
     }
-    public Texture2D GetFrontView()
+    public String GetFrontString()
     {
-        return _frontView;
+        return _frontViewString;
     }
-    public void SetRearView(Texture2D newSprite)
+    public void SetRearString(string newPath)
     {
-        _rearView = newSprite;
+        _rearViewString = newPath;
     }
-    public void SetFrontView(Texture2D newSprite)
+    public void SetFrontString(string newPath)
     {
-        _frontView = newSprite;
+        _frontViewString = newPath;
     }
 
     public byte D20Roll(int _modifier, int _buff, byte _advantage, out byte _originalRoll)

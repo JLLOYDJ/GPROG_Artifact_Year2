@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         }
         
         // Randomises which Pokemon Player Gets (Only 2 for this Artifact)
+        // If I did the External Data, I would have used a builder as it would work best.
+        // It wouldn't need multiple subclasses to ensure it passes through correctly.
         int pokemon = Random.Range(0, 2);
         if (pokemon == 0)
         {
