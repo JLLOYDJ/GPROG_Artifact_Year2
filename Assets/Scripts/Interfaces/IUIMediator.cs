@@ -8,4 +8,5 @@ public interface IUIMediator
     void TextDescriptionUpdate(uint moveIndex);
     void MoveActivated();
     void HPUpdate();
+    void AttackUpdate(string desc);
 }

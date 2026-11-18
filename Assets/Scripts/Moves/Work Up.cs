@@ -33,10 +33,7 @@ public class WorkUp : BaseMove
         // Add +2 to modifier, if player doesn't attack, it ends.
         // Add timer to buff (Maybe list or Dictonary for keeping track of these).
 
-        Debug.Log("ACTIVATED!");
-
         bool IsAction = User.actionResources.GetBonusAction();
-        Debug.Log(IsAction);
         if (IsAction)
         {
             bool _isMoveAvailable = PPCheck();
@@ -48,14 +45,23 @@ public class WorkUp : BaseMove
                 {
                     _isActive = true;
                     User.buffDebuff.NewBuffDebuffAttack(2, coreStats.GetDuration());
+                    UIManager.UIInstance.AttackUpdate("Work Up Now Active!");
                 }
                 else
                 {
-                    Debug.Log("Work_UpAlreadyActive!");
+                    UIManager.UIInstance.AttackUpdate("Work Up Already Active!");
                 }
             }
             else
+            {
+                UIManager.UIInstance.AttackUpdate("No Remaining PP for Workup!");
                 return;
+            }
+        }
+        else
+        {
+            UIManager.UIInstance.AttackUpdate("No Bonus Action Remaining!");
+            return;
         }
 
     }

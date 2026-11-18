@@ -43,7 +43,6 @@ public class TurnManager : MonoBehaviour, ID20
     {
         if (CheckTurn() == GameManager.GameInstance.GetPlayerPokemon())
         {
-            Debug.Log("Players Turn!");
             GameManager.EnemyAIState.ChangeState(new OpponentIdleState());
             GameManager.GameInstance.GetPlayerPokemon().actionResources.NewTurnReset();
             UIManager.UIInstance.PlayerTurn();
@@ -52,7 +51,6 @@ public class TurnManager : MonoBehaviour, ID20
         }
         else
         {
-            Debug.Log("Opponents Turn!");
             GameManager.GameInstance.GetOpponentPokemon().actionResources.NewTurnReset();
             GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
             UIManager.UIInstance.OpponentTurn();

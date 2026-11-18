@@ -26,10 +26,9 @@ public class Tackle : BaseMove
 
     public override void Activate(BasePokemon User)
     {
-        Debug.Log("ACTIVATED!");
-        
+        byte originalRoll;
+        byte newRoll;
         bool IsAction = User.actionResources.GetAction();
-        Debug.Log(IsAction);
         if (IsAction)
         {
             bool _isMoveAvailable = PPCheck();
@@ -37,8 +36,6 @@ public class Tackle : BaseMove
             {
                 powerPoints.ReducePPCurrent();
                 User.actionResources.ActivateAction();
-                byte originalRoll;
-                byte newRoll;
                 newRoll = User.D20Roll(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
                     User.buffDebuff.GetCurrentModifiedAttack(), 
                     DiceAdvantage.normal, 
@@ -46,18 +43,16 @@ public class Tackle : BaseMove
                 bool doesHit = GameManager.GameInstance.ACTest(User, newRoll);
                 if (doesHit)
                 {
-                    Debug.Log("HITS!");
                     byte currentLevel = User.level.GetCurrentLevel();
-                    byte diceAmount = diceLevel.GetDiceAmount(currentLevel);
-                    byte diceSize = diceLevel.GetDiceSize(currentLevel);
-                    Debug.Log(diceSize);
-                    byte diceRoll = 0;
+                    int diceAmount = diceLevel.GetDiceAmount(currentLevel);
+                    int diceSize = diceLevel.GetDiceSize(currentLevel);
+                    int diceRoll = 0;
                     for (int i = 0; i < diceAmount; i++)
                     {
-                        diceRoll += Convert.ToByte(UnityEngine.Random.Range(1, (diceAmount + 1)));
+                        int random = UnityEngine.Random.Range(1, (diceSize + 1));
+                        diceRoll += random;
                     }
-                    Convert.ToByte(diceAmount * diceSize);
-                    uint damageAmount = (Convert.ToUInt32(diceRoll + User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower()))));
+                    int damageAmount = diceRoll + User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower()));
                     if (originalRoll == 20)
                     {
                         damageAmount += diceRoll; // Doubling Dice Roll
@@ -68,18 +63,25 @@ public class Tackle : BaseMove
                         damageAmount *= 15;
                         damageAmount /= 10;
                     }
-                    GameManager.GameInstance.DamageOther(damageAmount, User, coreType.GetPokemonType());
+                    GameManager.GameInstance.DamageOther(Convert.ToUInt32(damageAmount), User, coreType.GetPokemonType(), moveID.GetName());
                 }
                 else
                 {
-                    Debug.Log("UI Here, Update to show it missed");
+                    UIManager.UIInstance.AttackUpdate("Tackle Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll);
+                    return;
                 }
             }
             else
             {
+                UIManager.UIInstance.AttackUpdate("No PP Remaining for Tackle");
                 return;
             }
-        }    
+        }
+        else
+        {
+            UIManager.UIInstance.AttackUpdate("No Action Remaining");
+            return;
+        }
         // Checks if Action has been used, if not continue
         // checks for PP first and does PPFail if there is nothing
         // Grabs Singleton Manager, passes through player and opponent

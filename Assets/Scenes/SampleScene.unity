@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 697.36194, y: -167.30713}
-  m_SizeDelta: {x: 291.2761, y: 54.6142}
+  m_AnchoredPosition: {x: 582, y: -167.15186}
+  m_SizeDelta: {x: 425.6425, y: 79.8502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4533662
 MonoBehaviour:
@@ -267,6 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 1
   _isDesc: 0
+  _isEndTurn: 0
 --- !u!1 &149196333
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,8 +305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 906.68, y: -331.14}
-  m_SizeDelta: {x: 80.639, y: 54.6142}
+  m_AnchoredPosition: {x: 887.8769, y: -406.6881}
+  m_SizeDelta: {x: 117.838, y: 79.8502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &149196335
 MonoBehaviour:
@@ -321,6 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 4
   _isDesc: 1
+  _isEndTurn: 0
 --- !u!114 &149196336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,8 +454,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 836.9159, y: -486.3254}
-  m_SizeDelta: {x: 220.1682, y: 57.3492}
+  m_AnchoredPosition: {x: 658.09, y: -486.3254}
+  m_SizeDelta: {x: 577.82, y: 57.3492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &191161425
 MonoBehaviour:
@@ -563,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 0
   _isDesc: 0
+  _isEndTurn: 1
 --- !u!1 &242526352
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,10 +757,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -912,10 +915,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -969,8 +972,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 697.36194, y: -331.14}
-  m_SizeDelta: {x: 291.2761, y: 54.6142}
+  m_AnchoredPosition: {x: 582, y: -406.6881}
+  m_SizeDelta: {x: 425.6425, y: 79.8502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &419271484
 MonoBehaviour:
@@ -1080,6 +1083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 4
   _isDesc: 0
+  _isEndTurn: 0
 --- !u!1 &499583826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,8 +1121,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 697.36194, y: -221.92}
-  m_SizeDelta: {x: 291.2761, y: 54.6142}
+  m_AnchoredPosition: {x: 582, y: -247.00006}
+  m_SizeDelta: {x: 425.6425, y: 79.8502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &499583828
 MonoBehaviour:
@@ -1228,6 +1232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 2
   _isDesc: 0
+  _isEndTurn: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,10 +1534,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1586,8 +1591,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 906.67773, y: -167.30713}
-  m_SizeDelta: {x: 80.6406, y: 54.6142}
+  m_AnchoredPosition: {x: 887.87366, y: -167.15186}
+  m_SizeDelta: {x: 117.8403, y: 79.8502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &691023310
 MonoBehaviour:
@@ -1603,6 +1608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 1
   _isDesc: 1
+  _isEndTurn: 0
 --- !u!114 &691023311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1734,8 +1740,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 697.36194, y: -276.53}
-  m_SizeDelta: {x: 291.2761, y: 54.6142}
+  m_AnchoredPosition: {x: 582, y: -326.84406}
+  m_SizeDelta: {x: 425.6425, y: 79.8502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &811576564
 MonoBehaviour:
@@ -1845,6 +1851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 3
   _isDesc: 0
+  _isEndTurn: 0
 --- !u!1 &839934961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,8 +1889,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 906.68, y: -276.53}
-  m_SizeDelta: {x: 80.641, y: 54.6142}
+  m_AnchoredPosition: {x: 887.8769, y: -326.84406}
+  m_SizeDelta: {x: 117.8409, y: 79.8502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839934963
 MonoBehaviour:
@@ -1899,6 +1906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 3
   _isDesc: 1
+  _isEndTurn: 0
 --- !u!114 &839934964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2278,8 +2286,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 906.68, y: -221.91997}
-  m_SizeDelta: {x: 80.641, y: 54.6142}
+  m_AnchoredPosition: {x: 887.87695, y: -247}
+  m_SizeDelta: {x: 117.8409, y: 79.8502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1285603060
 MonoBehaviour:
@@ -2295,6 +2303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   _moveIndex: 2
   _isDesc: 1
+  _isEndTurn: 0
 --- !u!114 &1285603061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2448,10 +2457,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2527,10 +2536,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2698,10 +2707,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2777,10 +2786,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2856,10 +2865,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -3062,8 +3071,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 257, y: -270.00015}
-  m_SizeDelta: {x: 396.2533, y: 540}
+  m_AnchoredPosition: {x: -65, y: -364.43}
+  m_SizeDelta: {x: 809.7789, y: 351.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2126500869
 MonoBehaviour:
@@ -3178,10 +3187,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0

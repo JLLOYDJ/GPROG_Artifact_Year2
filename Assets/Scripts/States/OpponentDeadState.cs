@@ -16,7 +16,6 @@ public class OpponentDeadState : OpponentBaseState
     }
     public override void Execute()
     {
-        Debug.Log("Dead from Enemy");
         GameManager.GameInstance.EndGame();
         GameManager.EnemyAIState.ChangeState(new OpponentEndGameState());
     }

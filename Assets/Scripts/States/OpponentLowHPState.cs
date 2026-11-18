@@ -48,7 +48,6 @@ public class OpponentLowHPState : OpponentBaseState
     }
     public override void Execute()
     {
-        Debug.Log("HPHeal");
         GameManager.GameInstance.GetOpponentPokemon().moveSet.GetCurrentMove(_chosenMove).Activate(GameManager.GameInstance.GetOpponentPokemon());
         TurnManager.TurnInstance.FinishTurn();
     }

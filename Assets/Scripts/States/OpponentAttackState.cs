@@ -43,7 +43,6 @@ public class OpponentAttackState : OpponentBaseState
     }
     public override void Execute()
     {
-        Debug.Log("AttackFromEnemy");
         GameManager.GameInstance.GetOpponentPokemon().moveSet.GetCurrentMove(_chosenMove).Activate(GameManager.GameInstance.GetOpponentPokemon());
         if (GameManager.GameInstance.GetOpponentPokemon().coreStats.GetCurrentHP() != 0)
         {

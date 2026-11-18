@@ -35,10 +35,11 @@ public class Growl : BaseMove
         // If so, -1 upto -5 on the oppontent.
 
         // Havent Implemented yet, but looking into making a reset for Growl when it has been past 10 rounds.
-        Debug.Log("ACTIVATED!");
 
+        byte savingThrowOpponent;
+        byte opponentOriginalRoll;
+        byte savingThrowDC;
         bool IsAction = User.actionResources.GetAction();
-        Debug.Log(IsAction);
         if (IsAction)
         {
             bool _isMoveAvailable = PPCheck();
@@ -46,46 +47,50 @@ public class Growl : BaseMove
             {
                 powerPoints.ReducePPCurrent();
                 User.actionResources.ActivateAction();
-                byte savingThrowOpponent;
-                byte opponentOriginalRoll;
                 if (User == GameManager.GameInstance.GetOpponentPokemon())
                 {
-                    savingThrowOpponent = GameManager.GameInstance.GetPlayerPokemon().D20Roll(GameManager.GameInstance.GetPlayerPokemon().coreStats.GetIndividualStat(GetMovePower()),
+                    savingThrowOpponent = GameManager.GameInstance.GetPlayerPokemon().D20Roll(GameManager.GameInstance.GetPlayerPokemon().modifierArray.ModifierCalulator(GameManager.GameInstance.GetPlayerPokemon().coreStats.GetIndividualStat(GetMovePower())),
                         GameManager.GameInstance.GetPlayerPokemon().buffDebuff.GetCurrentModifiedAttack(),
                         DiceAdvantage.normal, out opponentOriginalRoll);
                 }
                 else
                 {
-                    savingThrowOpponent = GameManager.GameInstance.GetOpponentPokemon().D20Roll(GameManager.GameInstance.GetOpponentPokemon().coreStats.GetIndividualStat(GetMovePower()),
+                    savingThrowOpponent = GameManager.GameInstance.GetOpponentPokemon().D20Roll(GameManager.GameInstance.GetOpponentPokemon().modifierArray.ModifierCalulator(GameManager.GameInstance.GetOpponentPokemon().coreStats.GetIndividualStat(GetMovePower())),
                         GameManager.GameInstance.GetOpponentPokemon().buffDebuff.GetCurrentModifiedAttack(),
                         DiceAdvantage.normal, out opponentOriginalRoll);
                 }
-                byte savingThrowDC = User.SavingThrowCal(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
+                savingThrowDC = User.SavingThrowCal(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
                     User.buffDebuff.GetCurrentModifiedAttack(),
                     User.proficiencyBonus.GetProficiencyBonus());
 
                 if (savingThrowDC >= savingThrowOpponent && GrowlUses < 5)
                 {
-                    if (User == GameManager.GameInstance.GetOpponentPokemon())
+                    if (User == GameManager.GameInstance.GetPlayerPokemon())
                     {
                         GameManager.GameInstance.GetOpponentPokemon().buffDebuff.NewBuffDebuffAttack(-1, coreStats.GetDuration());
+                        UIManager.UIInstance.AttackUpdate("Growl Used, they feel more intimidated to attack your Pokemon!");
                     }
                     else
                     {
                         GameManager.GameInstance.GetPlayerPokemon().buffDebuff.NewBuffDebuffAttack(-1, coreStats.GetDuration());
+                        UIManager.UIInstance.AttackUpdate("Growl Used, you feel more intimidated to attack this Pokemon!");
                     }
                     GrowlUses += 1;
                 }
                 else if (savingThrowDC >= savingThrowOpponent && GrowlUses == 5)
                 {
-                    Debug.Log("Max of 5 active growls have been used.");
+                    UIManager.UIInstance.AttackUpdate("Growl Used 5 times, unable to make attack modifier lower!");
                 }
                 else
                 {
-                    Debug.Log("UI Here, Update to show it missed");
+                    UIManager.UIInstance.AttackUpdate("Growl Missed!\nSaving Throw DC: " +savingThrowDC+ "\nOpponent Rolled: " +savingThrowOpponent);
                 }
 
             }
+        }
+        else
+        {
+            UIManager.UIInstance.AttackUpdate("No Action Remaining!");
         }
     }
 }

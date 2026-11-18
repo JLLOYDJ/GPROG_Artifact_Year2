@@ -6,13 +6,13 @@ using UnityEngine;
 [Serializable]
 public class DiceLevelIncrease
 {
-    private byte[,] _diceLevelIncrease = new byte[Level.maximumLevel, 2];
+    private int[,] _diceLevelIncrease = new int[Level.maximumLevel, 2];
     // This section handles the dice system that was originally multiple variables.
-    public byte GetDiceAmount(byte currentLevel)
+    public int GetDiceAmount(int currentLevel)
     {
         return _diceLevelIncrease[(currentLevel-1), 0];
     }
-    public byte GetDiceSize(byte currentLevel)
+    public int GetDiceSize(int currentLevel)
     {
         return _diceLevelIncrease[(currentLevel-1), 1];
     }
@@ -25,10 +25,10 @@ public class DiceLevelIncrease
     /// <param name="diceAmount"> The New Amount of Dice being Rolled</param>
     /// <param name="diceSize"> The New Size of Dice being Rolled</param>
     /// <param name="bandNumber"> Band 1: LV01-04, Band 2: LV05-09, Band 3: LV10-14, Band 4: LV15-20</param>
-    public void SetLevelDice(byte diceAmount, byte diceSize, byte bandNumber)
+    public void SetLevelDice(int diceAmount, int diceSize, int bandNumber)
     {
-        byte minimumLevel;
-        byte maximumLevel;
+        int minimumLevel;
+        int maximumLevel;
         switch (bandNumber)
         {
             case (1):
@@ -71,7 +71,7 @@ public class DiceLevelIncrease
     /// <param name="diceSizeB3">Band 3 (LV 10-16) Dice Size</param>
     /// <param name="diceAmountB4">Band 4 (LV 17-20) Dice Amount</param>
     /// <param name="diceSizeB4">Band 4 (LV 17-20) Dice Size</param>
-    public void SetAllLevelDice(byte diceAmountB1, byte diceSizeB1, byte diceAmountB2, byte diceSizeB2, byte diceAmountB3, byte diceSizeB3, byte diceAmountB4, byte diceSizeB4)
+    public void SetAllLevelDice(int diceAmountB1, int diceSizeB1, int diceAmountB2, int diceSizeB2, int diceAmountB3, int diceSizeB3, int diceAmountB4, int diceSizeB4)
     {
         SetLevelDice(diceAmountB1, diceSizeB1, 1);
         SetLevelDice(diceAmountB2, diceSizeB2, 2);

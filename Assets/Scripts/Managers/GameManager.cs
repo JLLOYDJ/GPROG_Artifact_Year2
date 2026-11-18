@@ -102,7 +102,6 @@ public class GameManager : MonoBehaviour
             _struggleTime = PPTest(OpponentPokemon);
             if (_struggleTime == true)
             {
-                Debug.Log("StruggleTime");
                 OpponentPokemon.moveSet.GetCurrentMove(0).Activate(OpponentPokemon);
             }
         }
@@ -131,7 +130,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DamageOther(uint amount, BasePokemon attacker, PokemonTypes moveType)
+    public void DamageOther(uint amount, BasePokemon attacker, PokemonTypes moveType, string attackName)
     {
         if (attacker == PlayerPokemon)
         {
@@ -154,7 +153,7 @@ public class GameManager : MonoBehaviour
             }
 
             OpponentPokemon.coreStats.HPDamage(amount);
-            Debug.Log(amount + "To Enemy");
+            UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + OpponentPokemon.coreID.GetName());
         }
         else
         {
@@ -177,13 +176,12 @@ public class GameManager : MonoBehaviour
             }
 
             PlayerPokemon.coreStats.HPDamage(amount);
-            Debug.Log(amount + "To Enemy");
+            UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + PlayerPokemon.coreID.GetName());
         }
     }
     public void NextTurnDebug()
     {
         
-        Debug.Log("Test");
         TurnManager.TurnInstance.FinishTurn();
     }
     public void EndGame()

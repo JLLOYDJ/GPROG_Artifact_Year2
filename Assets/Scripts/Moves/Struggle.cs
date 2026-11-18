@@ -26,10 +26,8 @@ public class Struggle : BaseMove
 
     public override void Activate(BasePokemon User)
     {
-        Debug.Log("ACTIVATED!");
 
         bool IsAction = User.actionResources.GetAction();
-        Debug.Log(IsAction);
         if (IsAction)
         {
            User.actionResources.ActivateAction();
@@ -45,15 +43,16 @@ public class Struggle : BaseMove
                 {
                    damageAmount *= 2; // Doubling Dice Roll
                 }
-                GameManager.GameInstance.DamageOther(Convert.ToUInt32(damageAmount), User, coreType.GetPokemonType());
+                GameManager.GameInstance.DamageOther(Convert.ToUInt32(damageAmount), User, coreType.GetPokemonType(), moveID.GetName());
            }
            else
            {
-              Debug.Log("UI Here, Update to show it missed");
+              UIManager.UIInstance.AttackUpdate("Struggle Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll);
            }
         }
         else
         {
+            UIManager.UIInstance.AttackUpdate("No Actions Remaining!");
             return;
         }
             // Grabs Singleton Manager, passes through player and opponent

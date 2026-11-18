@@ -1,6 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class UIManager : MonoBehaviour, IUIMediator
 {
@@ -107,7 +108,7 @@ public class UIManager : MonoBehaviour, IUIMediator
     public IEnumerator VisualWait()
     {
         OpponentTurn();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         PlayerTurn();
         
     }
@@ -124,8 +125,16 @@ public class UIManager : MonoBehaviour, IUIMediator
         _opponentHP.Fill(opponentHP);
     }
 
-    public void DiceRoll()
+    public void AttackUpdate(string description)
     {
+        StartCoroutine(MoveWait(description));
+        
+    }
+    public IEnumerator MoveWait(string Desc)
+    {
+        yield return new WaitForSeconds(0.1f);
+        _moveDesc.Fill(Desc);
 
     }
+
 }

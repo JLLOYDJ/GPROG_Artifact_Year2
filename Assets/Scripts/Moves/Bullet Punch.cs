@@ -29,10 +29,11 @@ public class BulletPunch : BaseMove
 
     public override void Activate(BasePokemon User)
     {
-        Debug.Log("ACTIVATED!");
 
+        byte originalRoll;
+        byte newRoll;
         bool IsAction = User.actionResources.GetBonusAction();
-        Debug.Log(IsAction);
+
         if (IsAction)
         {
             bool _isMoveAvailable = PPCheck();
@@ -40,8 +41,6 @@ public class BulletPunch : BaseMove
             {
                 powerPoints.ReducePPCurrent();
                 User.actionResources.ActivateBonusAction();
-                byte originalRoll;
-                byte newRoll;
                 newRoll = User.D20Roll(User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower())),
                     User.buffDebuff.GetCurrentModifiedAttack(),
                     DiceAdvantage.normal,
@@ -49,17 +48,16 @@ public class BulletPunch : BaseMove
                 bool doesHit = GameManager.GameInstance.ACTest(User, newRoll);
                 if (doesHit)
                 {
-                    Debug.Log("HITS!");
                     byte currentLevel = User.level.GetCurrentLevel();
-                    byte diceAmount = diceLevel.GetDiceAmount(currentLevel);
-                    byte diceSize = diceLevel.GetDiceSize(currentLevel);
-                    byte diceRoll = 0;
+                    int diceAmount = diceLevel.GetDiceAmount(currentLevel);
+                    int diceSize = diceLevel.GetDiceSize(currentLevel);
+                    int diceRoll = 0;
                     for (int i = 0; i < diceAmount; i++)
                     {
-                        diceRoll += Convert.ToByte(UnityEngine.Random.Range(1, (diceAmount + 1)));
+                        int random = UnityEngine.Random.Range(1, (diceSize + 1));
+                        diceRoll += random;
                     }
-                    Convert.ToByte(diceAmount * diceSize);
-                    uint damageAmount = (Convert.ToUInt32(diceRoll + User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower()))));
+                    int damageAmount = diceRoll + User.modifierArray.ModifierCalulator(User.coreStats.GetIndividualStat(GetMovePower()));
                     if (originalRoll == 20)
                     {
                         damageAmount += diceRoll; // Doubling Dice Roll
@@ -70,15 +68,17 @@ public class BulletPunch : BaseMove
                         damageAmount *= 15;
                         damageAmount /= 10;
                     }
-                    GameManager.GameInstance.DamageOther(damageAmount, User, coreType.GetPokemonType());
+                    GameManager.GameInstance.DamageOther(Convert.ToUInt32(damageAmount), User, coreType.GetPokemonType(), moveID.GetName());
                 }
                 else
                 {
-                    Debug.Log("UI Here, Update to show it missed");
+                    UIManager.UIInstance.AttackUpdate("Thundershock Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll);
+                    return;
                 }
             }
             else
             {
+                UIManager.UIInstance.AttackUpdate("No PP Remaining for Bullet Punch");
                 return;
             }
             // Checks if Bonus Action has been used, if not continue
@@ -89,6 +89,11 @@ public class BulletPunch : BaseMove
             // rolls with modifers added.
             // Goes to the Singleton Manager to pass the damage.
 
+        }
+        else
+        {
+            UIManager.UIInstance.AttackUpdate("No Bonus Action Remaining");
+            return;
         }
     }
 }

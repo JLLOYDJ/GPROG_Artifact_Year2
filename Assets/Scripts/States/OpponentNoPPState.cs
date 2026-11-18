@@ -9,7 +9,6 @@ public class OpponentNoPPState : OpponentBaseState
     }
     public override void Execute()
     {
-        Debug.Log("Struggle");
         GameManager.GameInstance.GetOpponentPokemon().moveSet.GetCurrentMove(0).Activate(GameManager.GameInstance.GetOpponentPokemon());
         if (GameManager.GameInstance.GetOpponentPokemon().coreStats.GetCurrentHP() != 0)
         {
