@@ -47,7 +47,7 @@ public class OpponentAttackState : OpponentBaseState
         GameManager.GameInstance.GetOpponentPokemon().moveSet.GetCurrentMove(_chosenMove).Activate(GameManager.GameInstance.GetOpponentPokemon());
         if (GameManager.GameInstance.GetOpponentPokemon().coreStats.GetCurrentHP() != 0)
         {
-            GameManager.TurnInstance.FinishTurn();
+            TurnManager.TurnInstance.FinishTurn();
         }
         else
         {

@@ -5,14 +5,12 @@ using UnityEngine.Rendering;
 public class GameManager : MonoBehaviour
 {
     public static GameManager GameInstance;
-    public static UIManager UIInstance;
     public static MoveIndex currentMoveIndex = new MoveIndex();
-    public static TurnManager TurnInstance;
     private BasePokemon PlayerPokemon;
     private BasePokemon OpponentPokemon;
     public static OpponentStateManager EnemyAIState = new OpponentStateManager();
 
-    // Mediator Section
+    // Mediator Section (To Pass to UI)
 
 
     // Using this section to build out Mediator since it has a bunch of things that the whole system will need to see.
@@ -28,17 +26,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        // Creating the new Game UI Manager to use. (Singleton since only 1 needs to be in the world.
-        if (UIInstance == null)
-        {
-            UIInstance = new GameObject("UIManager").AddComponent<UIManager>();
-            DontDestroyOnLoad(UIInstance);
-        }
-        // Same as before, doing this for the Turn Manager
-        if (TurnInstance == null)
-        {
-            TurnInstance = new TurnManager();
-        }
+        
         // Randomises which Pokemon Player Gets (Only 2 for this Artifact)
         // If I did the External Data, I would have used a builder as it would work best.
         // It wouldn't need multiple subclasses to ensure it passes through correctly.
@@ -58,11 +46,8 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        NewMove("Tackle");
-        PlayerPokemon.moveSet.GetCurrentMove(3);
-        PlayerPokemon.moveSet.GetCurrentMove(0).Activate(PlayerPokemon);
-        TurnInstance.BeginBattle(PlayerPokemon, OpponentPokemon);
-        Debug.Log(TurnInstance.CheckTurn());
+        TurnManager.TurnInstance.BeginBattle(PlayerPokemon, OpponentPokemon);
+        Debug.Log(TurnManager.TurnInstance.CheckTurn());
     }
 
     /// <summary>
@@ -102,7 +87,7 @@ public class GameManager : MonoBehaviour
     }
     public void PPFail()
     {
-        BasePokemon currentUser = TurnInstance.CheckTurn();
+        BasePokemon currentUser = TurnManager.TurnInstance.CheckTurn();
         bool _struggleTime = false;
         if (currentUser == PlayerPokemon)
         {
@@ -197,8 +182,9 @@ public class GameManager : MonoBehaviour
     }
     public void NextTurnDebug()
     {
+        
         Debug.Log("Test");
-        TurnInstance.FinishTurn();
+        TurnManager.TurnInstance.FinishTurn();
     }
     public void EndGame()
     {

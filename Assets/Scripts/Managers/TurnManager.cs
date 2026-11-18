@@ -1,9 +1,26 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 
-public class TurnManager : ID20
+public class TurnManager : MonoBehaviour, ID20
 {
+    // Creating the new Game UI Manager to use. (Singleton since only 1 needs to be in the world.
+    // Same as before, doing this for the Turn Manager
+    public static TurnManager TurnInstance;
+    void Awake()
+    {
+        if (TurnInstance == null)
+        {
+            TurnInstance = this;
+            DontDestroyOnLoad(TurnInstance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     // Creating the queue that takes the Pokemon's reference and 
     private Queue <BasePokemon> TurnOrder = new Queue<BasePokemon>();
 
@@ -19,23 +36,27 @@ public class TurnManager : ID20
 
     public void FinishTurn()
     {
-        AddTurn(CheckTurn());
-        TurnOrder.Dequeue();
-        StartTurn();
+        StartCoroutine(TurnWait());
     }
 
     public void StartTurn()
     {
         if (CheckTurn() == GameManager.GameInstance.GetPlayerPokemon())
         {
+            Debug.Log("Players Turn!");
             GameManager.EnemyAIState.ChangeState(new OpponentIdleState());
             GameManager.GameInstance.GetPlayerPokemon().actionResources.NewTurnReset();
+            UIManager.UIInstance.PlayerTurn();
+            
             // Opponent Turn ended and begin player turn.
         }
         else
         {
+            Debug.Log("Opponents Turn!");
             GameManager.GameInstance.GetOpponentPokemon().actionResources.NewTurnReset();
             GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
+            UIManager.UIInstance.OpponentTurn();
+            
             // Activate Opponent's State
         }
     }
@@ -45,33 +66,17 @@ public class TurnManager : ID20
         byte playerRoll = InitiativeCal(playerPokemon.modifierArray.ModifierCalulator(playerPokemon.coreStats.GetIndividualStat(movePower.dexterity)));
         byte opponentRoll = InitiativeCal(opponentPokemon.modifierArray.ModifierCalulator(opponentPokemon.coreStats.GetIndividualStat(movePower.dexterity)));
         
-        if (playerRoll > opponentRoll)
+        if (playerRoll >= opponentRoll)
         {
             AddTurn(playerPokemon);
             AddTurn(opponentPokemon);
-            GameManager.EnemyAIState.ChangeState(new OpponentIdleState());
-        }
-        else if (opponentRoll > playerRoll)
-        {
-            AddTurn(opponentPokemon);
-            AddTurn(playerPokemon);
-            GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
         }
         else
         {
-            if(playerPokemon.coreStats.GetIndividualStat(movePower.dexterity) >= opponentPokemon.coreStats.GetIndividualStat(movePower.dexterity))
-            {
-                AddTurn(playerPokemon);
-                AddTurn(opponentPokemon);
-                GameManager.EnemyAIState.ChangeState(new OpponentIdleState());
-            }
-            else
-            {
-                AddTurn(opponentPokemon);
-                AddTurn(playerPokemon);
-                GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
-            }
+            AddTurn(opponentPokemon);
+            AddTurn(playerPokemon);
         }
+        StartTurn();
     }
 
     public byte InitiativeCal(int dexModifer)
@@ -87,5 +92,13 @@ public class TurnManager : ID20
         _originalResult = Convert.ToByte(diceRoll);
         diceRoll += _Modifier;
         return Convert.ToByte(diceRoll);
+    }
+
+    public IEnumerator TurnWait()
+    {
+        yield return new WaitForSeconds(5);
+        AddTurn(CheckTurn());
+        TurnOrder.Dequeue();
+        StartTurn();
     }
 }

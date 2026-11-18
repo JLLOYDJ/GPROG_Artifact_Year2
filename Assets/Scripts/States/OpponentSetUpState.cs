@@ -45,6 +45,6 @@ public class OpponentSetUpState : OpponentBaseState
     {
         Debug.Log("SetUp from enemy");
         GameManager.GameInstance.GetOpponentPokemon().moveSet.GetCurrentMove(_chosenMove).Activate(GameManager.GameInstance.GetOpponentPokemon());
-        GameManager.TurnInstance.FinishTurn();
+        TurnManager.TurnInstance.FinishTurn();
     }
 }

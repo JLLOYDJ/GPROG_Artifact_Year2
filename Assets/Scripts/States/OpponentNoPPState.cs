@@ -13,7 +13,7 @@ public class OpponentNoPPState : OpponentBaseState
         GameManager.GameInstance.GetOpponentPokemon().moveSet.GetCurrentMove(0).Activate(GameManager.GameInstance.GetOpponentPokemon());
         if (GameManager.GameInstance.GetOpponentPokemon().coreStats.GetCurrentHP() != 0)
         {
-            GameManager.TurnInstance.FinishTurn();
+            TurnManager.TurnInstance.FinishTurn();
         }
         else
         {
