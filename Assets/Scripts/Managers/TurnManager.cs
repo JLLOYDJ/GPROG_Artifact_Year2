@@ -36,7 +36,7 @@ public class TurnManager : MonoBehaviour, ID20
 
     public void FinishTurn()
     {
-        StartCoroutine(TurnWait());
+        StartCoroutine(TurnWait(CheckTurn()));
     }
 
     public void StartTurn()
@@ -56,7 +56,7 @@ public class TurnManager : MonoBehaviour, ID20
             GameManager.GameInstance.GetOpponentPokemon().actionResources.NewTurnReset();
             GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
             UIManager.UIInstance.OpponentTurn();
-            
+
             // Activate Opponent's State
         }
     }
@@ -94,9 +94,12 @@ public class TurnManager : MonoBehaviour, ID20
         return Convert.ToByte(diceRoll);
     }
 
-    public IEnumerator TurnWait()
+    public IEnumerator TurnWait(BasePokemon User)
     {
-        yield return new WaitForSeconds(5);
+        if (User != GameManager.GameInstance.GetPlayerPokemon())
+        {
+            yield return new WaitForSeconds(3);
+        }
         AddTurn(CheckTurn());
         TurnOrder.Dequeue();
         StartTurn();

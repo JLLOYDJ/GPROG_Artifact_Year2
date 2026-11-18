@@ -1,14 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIButton : MonoBehaviour
+public class UIButton : MediatorUI
 {
     [SerializeField]
     private uint _moveIndex;
     [SerializeField]
     private bool _isDesc;
-
-    private bool _isShowing;
 
     public void OnClick()
     {
@@ -24,19 +22,13 @@ public class UIButton : MonoBehaviour
 
     public void Description()
     {
-        if (_isShowing)
-        {
-
-        }
-        else
-        {
-
-        }
+        UIMediator?.TextDescriptionUpdate(_moveIndex);
     }
 
     public void Activation()
     {
         GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).Activate(GameManager.GameInstance.GetPlayerPokemon());
+        UIMediator.MoveActivated();
     }
     /// <summary>
     /// This section sets if the button hides. If true, it hides the button from screen.

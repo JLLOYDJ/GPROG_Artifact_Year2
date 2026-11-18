@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using System.Collections;
 
 public class UIManager : MonoBehaviour, IUIMediator
 {
@@ -16,16 +16,29 @@ public class UIManager : MonoBehaviour, IUIMediator
     [SerializeField] private UIButton _moveDesc3;
     [SerializeField] private UIButton _moveDesc4;
     [SerializeField] private UIButton _endTurn;
+    [SerializeField] private UIText _moveDesc;
+    [SerializeField] private UIText _playerHP;
+    [SerializeField] private UIText _opponentHP;
 
     public static UIManager UIInstance;
-    // This allows the grabbing of images within the scene so they can be edited to be the users pokemon.
-    //private static GameObject _playerImage;
-    //private static GameObject _opponentImage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         _playerImage.SetMediator(this);
         _opponentImage.SetMediator(this);
+        _move1.SetMediator(this);
+        _move2.SetMediator(this);
+        _move3.SetMediator(this);
+        _move4.SetMediator(this);
+        _moveDesc1.SetMediator(this);
+        _moveDesc2.SetMediator(this);
+        _moveDesc3.SetMediator(this);
+        _moveDesc4.SetMediator(this);
+        _endTurn.SetMediator(this);
+        _moveDesc.SetMediator(this);
+        _playerHP.SetMediator(this);
+        _opponentHP.SetMediator(this);
+
         if (UIInstance == null)
         {
             UIInstance = this;
@@ -63,6 +76,8 @@ public class UIManager : MonoBehaviour, IUIMediator
         _moveDesc3.Hiding(true);
         _moveDesc4.Hiding(true);
         _endTurn.Hiding(true);
+        _moveDesc.Empty();
+        HPUpdate();
         
     }
     public void OpponentTurn()
@@ -76,27 +91,37 @@ public class UIManager : MonoBehaviour, IUIMediator
         _moveDesc3.Hiding(false);
         _moveDesc4.Hiding(false);
         _endTurn.Hiding(false);
+        _moveDesc.Empty();
+        HPUpdate();
     }
-    public void UpdateSprites()
-    {
-        // Updated System using the setting of Texture 2D as the sprites within the game.
-        // Now defunct as it has been passed to UIIMage code as this is the mediator.
-        Texture2D playerImage = Resources.Load<Texture2D>(GameManager.GameInstance.GetPlayerPokemon().GetRearString());
-        Texture2D opponentImage = Resources.Load<Texture2D>(GameManager.GameInstance.GetOpponentPokemon().GetFrontString());
-        _playerImage.gameObject.GetComponent<Image>().overrideSprite = Sprite.Create(playerImage, new Rect(0, 0, playerImage.width, playerImage.height), new Vector2(playerImage.width / 2, playerImage.height / 2));
-        _opponentImage.gameObject.GetComponent<Image>().overrideSprite = Sprite.Create(opponentImage, new Rect(0, 0, opponentImage.width, opponentImage.height), new Vector2(opponentImage.width / 2, opponentImage.height / 2));
 
-        // Original way, while working wasn't as optimal as it will call to the game manager multiple times.
-        /*_playerImage.gameObject.GetComponent<Image>().overrideSprite = Sprite.Create(GameManager.GameInstance.GetPlayerPokemon().GetRearView(),
-            new Rect(0, 0, GameManager.GameInstance.GetPlayerPokemon().GetRearView().width,
-            GameManager.GameInstance.GetPlayerPokemon().GetRearView().height),
-            new Vector2(GameManager.GameInstance.GetPlayerPokemon().GetRearView().width / 2,
-            GameManager.GameInstance.GetPlayerPokemon().GetRearView().height / 2));
-        _opponentImage.gameObject.GetComponent<Image>().overrideSprite = Sprite.Create(GameManager.GameInstance.GetOpponentPokemon().GetFrontView(),
-            new Rect(0, 0, GameManager.GameInstance.GetOpponentPokemon().GetFrontView().width,
-            GameManager.GameInstance.GetOpponentPokemon().GetFrontView().height),
-            new Vector2(GameManager.GameInstance.GetOpponentPokemon().GetFrontView().width / 2,
-            GameManager.GameInstance.GetOpponentPokemon().GetRearView().height / 2));*/
+    public void TextDescriptionUpdate(uint moveIndex)
+    {
+        _moveDesc.Fill(GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(moveIndex).moveID.GetDescription());
+    }
+
+    public void MoveActivated()
+    {
+        StartCoroutine(VisualWait());
+    }
+    public IEnumerator VisualWait()
+    {
+        OpponentTurn();
+        yield return new WaitForSeconds(2);
+        PlayerTurn();
+        
+    }
+
+    public void HPUpdate()
+    {
+        string playerHP;
+        string opponentHP;
+
+        playerHP = GameManager.GameInstance.GetPlayerPokemon().coreID.GetName() + "\nHP: " + GameManager.GameInstance.GetPlayerPokemon().coreStats.GetCurrentHP() + " / " + GameManager.GameInstance.GetPlayerPokemon().coreStats.GetMaxHP();
+        opponentHP = GameManager.GameInstance.GetOpponentPokemon().coreID.GetName() + "\nHP: " + GameManager.GameInstance.GetOpponentPokemon().coreStats.GetCurrentHP() + " / " + GameManager.GameInstance.GetOpponentPokemon().coreStats.GetMaxHP();
+
+        _playerHP.Fill(playerHP);
+        _opponentHP.Fill(opponentHP);
     }
 
     public void DiceRoll()
