@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WorkUp : BaseMove
 {
-    private bool _isActive = false;
+    private bool _isActive;
     public WorkUp() // Converted from Awake to Constructor so it would compile before runtime.
     {
         moveID.SetName("Work Up");
@@ -23,6 +23,7 @@ public class WorkUp : BaseMove
         powerPoints.SetPPCurrent(powerPoints.GetPPMax());
         SetMovePower(movePower.none);
         SetMoveVariant(moveVariant.Buff);
+        _isActive = false;
     }
 
     public override void Activate(BasePokemon User)

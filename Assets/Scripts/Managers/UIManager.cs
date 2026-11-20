@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour, IUIMediator
     [SerializeField] private UIText _moveDesc;
     [SerializeField] private UIText _playerHP;
     [SerializeField] private UIText _opponentHP;
+    [SerializeField] private UIText _playerAction;
+    [SerializeField] private UIText _playerBonusAction;
+    [SerializeField] private UIText _endGameText;
 
     public static UIManager UIInstance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +42,8 @@ public class UIManager : MonoBehaviour, IUIMediator
         _moveDesc.SetMediator(this);
         _playerHP.SetMediator(this);
         _opponentHP.SetMediator(this);
+        _playerAction.SetMediator(this);
+        _playerBonusAction.SetMediator(this);
 
         if (UIInstance == null)
         {
@@ -53,12 +58,6 @@ public class UIManager : MonoBehaviour, IUIMediator
     void Start()
     {
         Initialisation();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Initialisation()
@@ -78,6 +77,8 @@ public class UIManager : MonoBehaviour, IUIMediator
         _moveDesc4.Hiding(true);
         _endTurn.Hiding(true);
         _moveDesc.Empty();
+        _playerAction.Fill("===Action===\n" + GameManager.GameInstance.GetPlayerPokemon().actionResources.GetAction());
+        _playerBonusAction.Fill("===Bonus Action===\n" + GameManager.GameInstance.GetPlayerPokemon().actionResources.GetBonusAction());
         HPUpdate();
         
     }
@@ -93,6 +94,8 @@ public class UIManager : MonoBehaviour, IUIMediator
         _moveDesc4.Hiding(false);
         _endTurn.Hiding(false);
         _moveDesc.Empty();
+        _playerAction.Empty();
+        _playerBonusAction.Empty();
         HPUpdate();
     }
 
@@ -135,6 +138,25 @@ public class UIManager : MonoBehaviour, IUIMediator
         yield return new WaitForSeconds(0.1f);
         _moveDesc.Fill(Desc);
 
+    }
+
+    public void GameEnding(bool _playerLose)
+    {
+        OpponentTurn();
+        _playerImage.GetComponent<Image>().enabled = false;
+        _opponentImage.GetComponent<Image>().enabled = false;
+        _moveDesc.Empty();
+        _playerHP.Empty();
+        _opponentHP.Empty();
+
+        if (_playerLose)
+        {
+            _endGameText.Fill("Player Loses...");
+        }
+        else
+        {
+            _endGameText.Fill("Player Wins!!!");
+        }
     }
 
 }

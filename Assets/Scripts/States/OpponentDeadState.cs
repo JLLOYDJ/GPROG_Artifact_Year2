@@ -16,7 +16,7 @@ public class OpponentDeadState : OpponentBaseState
     }
     public override void Execute()
     {
-        GameManager.GameInstance.EndGame();
+        GameManager.GameInstance.EndGame(false);
         GameManager.EnemyAIState.ChangeState(new OpponentEndGameState());
     }
 

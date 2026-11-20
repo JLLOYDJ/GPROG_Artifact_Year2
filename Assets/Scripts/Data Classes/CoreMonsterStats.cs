@@ -3,35 +3,35 @@ using UnityEngine;
 [Serializable]
 public class CoreMonsterStats : IHeal
 {
-    private uint _hp;
-    private uint _maxHP;
+    private int _hp;
+    private int _maxHP;
     private uint _speed;
     private byte[] _stats = new byte[6];
     // looking into circular lists, will add when everything else is fleshed out
     private byte _ac;
     private movePower _savingThrowPer;
 
-    public uint GetCurrentHP()
+    public int GetCurrentHP()
     {
         return _hp;
     }
-    public void SetCurrentHP(uint newHP)
+    public void SetCurrentHP(int newHP)
     {
         _hp = newHP;
     }
-    public void HPHeal(uint amount)
+    public void HPHeal(int amount)
     {
         _hp += amount;
     }
-    public void HPDamage(uint amount)
+    public void HPDamage(int amount)
     {
         _hp -= amount;
     }
-    public uint GetMaxHP()
+    public int GetMaxHP()
     {
         return _maxHP;
     }
-    public void SetMaxHP(uint newMax)
+    public void SetMaxHP(int newMax)
     {
         _maxHP = newMax;
     }

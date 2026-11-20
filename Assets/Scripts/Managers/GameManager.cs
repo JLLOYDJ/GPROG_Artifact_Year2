@@ -152,8 +152,12 @@ public class GameManager : MonoBehaviour
                 amount = 0;
             }
 
-            OpponentPokemon.coreStats.HPDamage(amount);
+            OpponentPokemon.coreStats.HPDamage(System.Convert.ToInt32(amount));
             UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + OpponentPokemon.coreID.GetName());
+            if (OpponentPokemon.coreStats.GetCurrentHP() <= 0)
+            {
+                EndGame(false);
+            }
         }
         else
         {
@@ -175,8 +179,12 @@ public class GameManager : MonoBehaviour
                 amount = 0;
             }
 
-            PlayerPokemon.coreStats.HPDamage(amount);
+            PlayerPokemon.coreStats.HPDamage(System.Convert.ToInt32(amount));
             UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + PlayerPokemon.coreID.GetName());
+            if (PlayerPokemon.coreStats.GetCurrentHP() <= 0)
+            {
+                EndGame(true);
+            }
         }
     }
     public void NextTurnDebug()
@@ -184,8 +192,9 @@ public class GameManager : MonoBehaviour
         
         TurnManager.TurnInstance.FinishTurn();
     }
-    public void EndGame()
+    public void EndGame(bool _playerLose)
     {
-
+        EnemyAIState.ChangeState(new OpponentEndGameState());
+        UIManager.UIInstance.GameEnding(_playerLose);
     }
 }

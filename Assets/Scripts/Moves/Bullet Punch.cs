@@ -72,7 +72,7 @@ public class BulletPunch : BaseMove
                 }
                 else
                 {
-                    UIManager.UIInstance.AttackUpdate("Thundershock Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll);
+                    UIManager.UIInstance.AttackUpdate("Bullet Punch Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll);
                     return;
                 }
             }

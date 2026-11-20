@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IHeal
 {
-    void HPHeal(uint amount);
+    void HPHeal(int amount);
 }

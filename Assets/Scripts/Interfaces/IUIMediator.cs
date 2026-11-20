@@ -9,4 +9,5 @@ public interface IUIMediator
     void MoveActivated();
     void HPUpdate();
     void AttackUpdate(string desc);
+    void GameEnding(bool _playerLose);
 }

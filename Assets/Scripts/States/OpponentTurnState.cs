@@ -5,6 +5,8 @@ public class OpponentTurnState : OpponentBaseState
     public override void Enter()
     {
         //YAY
+        // Put the resource reset here in order for it to be enabled at the start of the TurnState.
+        GameManager.GameInstance.GetOpponentPokemon().actionResources.NewTurnReset();
         // Instead of being on Update, it is here because it doesn't need to keep checking like a realtime game.
         Execute();
     }

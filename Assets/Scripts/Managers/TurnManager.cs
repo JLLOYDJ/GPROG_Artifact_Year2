@@ -51,7 +51,6 @@ public class TurnManager : MonoBehaviour, ID20
         }
         else
         {
-            GameManager.GameInstance.GetOpponentPokemon().actionResources.NewTurnReset();
             GameManager.EnemyAIState.ChangeState(new OpponentTurnState());
             UIManager.UIInstance.OpponentTurn();
 
