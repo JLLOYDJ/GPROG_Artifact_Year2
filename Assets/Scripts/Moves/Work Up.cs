@@ -46,22 +46,22 @@ public class WorkUp : BaseMove
                 {
                     _isActive = true;
                     User.buffDebuff.NewBuffDebuffAttack(2, coreStats.GetDuration());
-                    UIManager.UIInstance.AttackUpdate("Work Up Now Active!");
+                    UIManager.UIInstance.AttackUpdate("Work Up Now Active!", false);
                 }
                 else
                 {
-                    UIManager.UIInstance.AttackUpdate("Work Up Already Active!");
+                    UIManager.UIInstance.AttackUpdate("Work Up Already Active!", false);
                 }
             }
             else
             {
-                UIManager.UIInstance.AttackUpdate("No Remaining PP for Workup!");
+                UIManager.UIInstance.AttackUpdate("No Remaining PP for Workup!", false);
                 return;
             }
         }
         else
         {
-            UIManager.UIInstance.AttackUpdate("No Bonus Action Remaining!");
+            UIManager.UIInstance.AttackUpdate("No Bonus Action Remaining!", false);
             return;
         }
 

@@ -72,13 +72,13 @@ public class BulletPunch : BaseMove
                 }
                 else
                 {
-                    UIManager.UIInstance.AttackUpdate("Bullet Punch Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll);
+                    UIManager.UIInstance.AttackUpdate("Bullet Punch Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll, false);
                     return;
                 }
             }
             else
             {
-                UIManager.UIInstance.AttackUpdate("No PP Remaining for Bullet Punch");
+                UIManager.UIInstance.AttackUpdate("No PP Remaining for Bullet Punch", false);
                 return;
             }
             // Checks if Bonus Action has been used, if not continue
@@ -92,7 +92,7 @@ public class BulletPunch : BaseMove
         }
         else
         {
-            UIManager.UIInstance.AttackUpdate("No Bonus Action Remaining");
+            UIManager.UIInstance.AttackUpdate("No Bonus Action Remaining", false);
             return;
         }
     }

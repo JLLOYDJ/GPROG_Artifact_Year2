@@ -7,7 +7,9 @@ using UnityEngine;
 public class MoveIndex
 {
     // Reason for it not working is due to not being in an function/Awake
-    // I love this dictionary!
+    // The issue with the way I originally done this dictonary is it links the moves between the two pokemon
+    // This in turn causes both PP and other stuff to be shared, not duplicated.
+    // 
     private Dictionary<string, BaseMove> MoveDictionary = new Dictionary<string, BaseMove>();
     // Using a Traditional Constructor as it will be ready when the game is ready.
     public MoveIndex()

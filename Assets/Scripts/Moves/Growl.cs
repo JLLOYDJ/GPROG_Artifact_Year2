@@ -68,29 +68,29 @@ public class Growl : BaseMove
                     if (User == GameManager.GameInstance.GetPlayerPokemon())
                     {
                         GameManager.GameInstance.GetOpponentPokemon().buffDebuff.NewBuffDebuffAttack(-1, coreStats.GetDuration());
-                        UIManager.UIInstance.AttackUpdate("Growl Used, they feel more intimidated to attack your Pokemon!");
+                        UIManager.UIInstance.AttackUpdate("Growl Used, they feel more intimidated to attack your Pokemon!", false);
                     }
                     else
                     {
                         GameManager.GameInstance.GetPlayerPokemon().buffDebuff.NewBuffDebuffAttack(-1, coreStats.GetDuration());
-                        UIManager.UIInstance.AttackUpdate("Growl Used, you feel more intimidated to attack this Pokemon!");
+                        UIManager.UIInstance.AttackUpdate("Growl Used, you feel more intimidated to attack this Pokemon!", false);
                     }
                     GrowlUses += 1;
                 }
                 else if (savingThrowDC >= savingThrowOpponent && GrowlUses == 5)
                 {
-                    UIManager.UIInstance.AttackUpdate("Growl Used 5 times, unable to make attack modifier lower!");
+                    UIManager.UIInstance.AttackUpdate("Growl Used 5 times, unable to make attack modifier lower!", false);
                 }
                 else
                 {
-                    UIManager.UIInstance.AttackUpdate("Growl Missed!\nSaving Throw DC: " +savingThrowDC+ "\nOpponent Rolled: " +savingThrowOpponent);
+                    UIManager.UIInstance.AttackUpdate("Growl Missed!\nSaving Throw DC: " +savingThrowDC+ "\nOpponent Rolled: " +savingThrowOpponent, false);
                 }
 
             }
         }
         else
         {
-            UIManager.UIInstance.AttackUpdate("No Action Remaining!");
+            UIManager.UIInstance.AttackUpdate("No Action Remaining!", false);
         }
     }
 }

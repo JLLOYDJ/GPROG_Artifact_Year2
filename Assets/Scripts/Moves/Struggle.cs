@@ -47,12 +47,12 @@ public class Struggle : BaseMove
            }
            else
            {
-              UIManager.UIInstance.AttackUpdate("Struggle Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll);
+              UIManager.UIInstance.AttackUpdate("Struggle Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll, false);
            }
         }
         else
         {
-            UIManager.UIInstance.AttackUpdate("No Actions Remaining!");
+            UIManager.UIInstance.AttackUpdate("No Actions Remaining!", false);
             return;
         }
             // Grabs Singleton Manager, passes through player and opponent

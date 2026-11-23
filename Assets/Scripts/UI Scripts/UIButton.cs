@@ -47,7 +47,6 @@ public class UIButton : MediatorUI
     public void Activation()
     {
         GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).Activate(GameManager.GameInstance.GetPlayerPokemon());
-        UIMediator.MoveActivated();
     }
     /// <summary>
     /// This section sets if the button hides. If true, it hides the button from screen.

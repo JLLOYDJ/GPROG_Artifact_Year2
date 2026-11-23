@@ -69,13 +69,13 @@ public class Thundershock : BaseMove
                 }
                 else
                 {
-                    UIManager.UIInstance.AttackUpdate("Thundershock Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll);
+                    UIManager.UIInstance.AttackUpdate("Thundershock Missed!\n Original Roll: " + originalRoll + "\nAfter Modifiers: " + newRoll, false);
                     return;
                 }
             }
             else
             {
-                UIManager.UIInstance.AttackUpdate("No PP Remaining for Thundershock");
+                UIManager.UIInstance.AttackUpdate("No PP Remaining for Thundershock", false);
                 return;
             }
             // Checks if Action has been used, if not continue
@@ -89,7 +89,7 @@ public class Thundershock : BaseMove
         }
         else
         {
-            UIManager.UIInstance.AttackUpdate("No Action Remaining");
+            UIManager.UIInstance.AttackUpdate("No Action Remaining", false);
         }
     }
 }

@@ -153,10 +153,14 @@ public class GameManager : MonoBehaviour
             }
 
             OpponentPokemon.coreStats.HPDamage(System.Convert.ToInt32(amount));
-            UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + OpponentPokemon.coreID.GetName());
             if (OpponentPokemon.coreStats.GetCurrentHP() <= 0)
             {
+                UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + OpponentPokemon.coreID.GetName(), true);
                 EndGame(false);
+            }
+            else
+            {
+                UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + OpponentPokemon.coreID.GetName(), false);
             }
         }
         else
@@ -180,10 +184,14 @@ public class GameManager : MonoBehaviour
             }
 
             PlayerPokemon.coreStats.HPDamage(System.Convert.ToInt32(amount));
-            UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + PlayerPokemon.coreID.GetName());
             if (PlayerPokemon.coreStats.GetCurrentHP() <= 0)
             {
+                UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + PlayerPokemon.coreID.GetName(), true);
                 EndGame(true);
+            }
+            else
+            {
+                UIManager.UIInstance.AttackUpdate(attackName + " Used!\n Damage = " + amount + " on " + PlayerPokemon.coreID.GetName(), false);
             }
         }
     }

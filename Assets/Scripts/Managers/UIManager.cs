@@ -104,18 +104,6 @@ public class UIManager : MonoBehaviour, IUIMediator
         _moveDesc.Fill(GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(moveIndex).moveID.GetDescription());
     }
 
-    public void MoveActivated()
-    {
-        StartCoroutine(VisualWait());
-    }
-    public IEnumerator VisualWait()
-    {
-        OpponentTurn();
-        yield return new WaitForSeconds(3);
-        PlayerTurn();
-        
-    }
-
     public void HPUpdate()
     {
         string playerHP;
@@ -128,27 +116,32 @@ public class UIManager : MonoBehaviour, IUIMediator
         _opponentHP.Fill(opponentHP);
     }
 
-    public void AttackUpdate(string description)
+    public void AttackUpdate(string description, bool gameEnd)
     {
-        StartCoroutine(MoveWait(description));
+        StartCoroutine(MoveWait(description, gameEnd));
         
     }
-    public IEnumerator MoveWait(string Desc)
+    public IEnumerator MoveWait(string Desc, bool gameEnd)
     {
+        OpponentTurn();
         yield return new WaitForSeconds(0.1f);
         _moveDesc.Fill(Desc);
+        yield return new WaitForSeconds(3);
+        if (gameEnd == false)
+        {
+            PlayerTurn();
+        }
+        else
+        {
+            _moveDesc.Empty();
+        }
+
 
     }
 
     public void GameEnding(bool _playerLose)
     {
-        OpponentTurn();
-        _playerImage.GetComponent<Image>().enabled = false;
-        _opponentImage.GetComponent<Image>().enabled = false;
-        _moveDesc.Empty();
-        _playerHP.Empty();
-        _opponentHP.Empty();
-
+        GameEndWait();
         if (_playerLose)
         {
             _endGameText.Fill("Player Loses...");
@@ -157,6 +150,17 @@ public class UIManager : MonoBehaviour, IUIMediator
         {
             _endGameText.Fill("Player Wins!!!");
         }
+    }
+
+    public IEnumerator GameEndWait()
+    {
+        yield return new WaitForSeconds(4.0f);
+        OpponentTurn();
+        _playerImage.GetComponent<Image>().enabled = false;
+        _opponentImage.GetComponent<Image>().enabled = false;
+        _moveDesc.Empty();
+        _playerHP.Empty();
+        _opponentHP.Empty();
     }
 
 }
