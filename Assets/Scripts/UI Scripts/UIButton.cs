@@ -10,6 +10,9 @@ public class UIButton : MediatorUI
     [SerializeField]
     private bool _isEndTurn;
 
+    private Color _colorAction = new Vector4(0, 255, 0, 255);
+    private Color _colorBonus = new Vector4(125, 125, 0, 255);
+
     public void Start()
     {
         if (_isDesc)
@@ -22,7 +25,15 @@ public class UIButton : MediatorUI
         }
         else
         {
-            GetComponentInChildren<Text>().text = GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).moveID.GetName() + " " + GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).powerPoints.GetPPCurrent() + "/" + GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).powerPoints.GetPPMax();
+            UpdateText();
+            if (GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).coreStats.GetAction() == true)
+            {
+                GetComponent<Image>().color = _colorAction;
+            }
+            else
+            {
+                GetComponent<Image>().color = _colorBonus;
+            }
         }
         
     }
@@ -56,8 +67,17 @@ public class UIButton : MediatorUI
     {
         GetComponent<Image>().enabled = setVisible;
         GetComponentInChildren<Text>().enabled = setVisible;
+        UpdateText();
        
     }
     
+    public void UpdateText()
+    {
+        if (_isDesc == false && _isEndTurn == false)
+        {
+            GetComponentInChildren<Text>().text = GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).moveID.GetName() + " " + GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).powerPoints.GetPPCurrent() + "/" + GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).powerPoints.GetPPMax();
+        }
+        
+    }
   
 }
