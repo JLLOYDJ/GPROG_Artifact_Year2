@@ -136,12 +136,22 @@ public class UIManager : MonoBehaviour, IUIMediator
             _moveDesc.Empty();
         }
 
-
     }
 
     public void GameEnding(bool _playerLose)
     {
-        GameEndWait();
+        StartCoroutine(GameEndWait(_playerLose));
+    }
+
+    public IEnumerator GameEndWait(bool _playerLose)
+    {
+        yield return new WaitForSeconds(3.1f);
+        OpponentTurn();
+        _playerImage.GetComponent<Image>().enabled = false;
+        _opponentImage.GetComponent<Image>().enabled = false;
+        _moveDesc.Empty();
+        _playerHP.Empty();
+        _opponentHP.Empty();
         if (_playerLose)
         {
             _endGameText.Fill("Player Loses...");
@@ -150,17 +160,6 @@ public class UIManager : MonoBehaviour, IUIMediator
         {
             _endGameText.Fill("Player Wins!!!");
         }
-    }
-
-    public IEnumerator GameEndWait()
-    {
-        yield return new WaitForSeconds(4.0f);
-        OpponentTurn();
-        _playerImage.GetComponent<Image>().enabled = false;
-        _opponentImage.GetComponent<Image>().enabled = false;
-        _moveDesc.Empty();
-        _playerHP.Empty();
-        _opponentHP.Empty();
     }
 
 }
