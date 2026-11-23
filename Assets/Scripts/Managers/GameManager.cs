@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// This Function passes through the MoveIndex Result.
+    /// This Function passes through the MoveIndex Result. (SCRAPPED due to linking issues)
     /// </summary>
     /// <param name="moveName"></param>
     /// <returns></returns>

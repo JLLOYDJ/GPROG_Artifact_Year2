@@ -22,7 +22,7 @@ public class UIButton : MediatorUI
         }
         else
         {
-            GetComponentInChildren<Text>().text = GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).moveID.GetName();
+            GetComponentInChildren<Text>().text = GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).moveID.GetName() + " " + GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).powerPoints.GetPPCurrent() + "/" + GameManager.GameInstance.GetPlayerPokemon().moveSet.GetCurrentMove(_moveIndex).powerPoints.GetPPMax();
         }
         
     }

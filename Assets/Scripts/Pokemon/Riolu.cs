@@ -29,7 +29,7 @@ public class Riolu : BasePokemon
         coreStats.SetSpeed(30);
         level.SetCurrentLevel(1);
         level.SetMinimumLevel(1);
-        moveSet.SetAllMoves("Tackle", "Growl", "Work Up", "Bullet Punch");
+        moveSet.SetAllMoves(new Tackle(), new Growl(), new WorkUp(), new BulletPunch());
         mainType.SetPokemonType(PokemonTypes.fighting);
         subType.SetPokemonType(PokemonTypes.typeless);
         typeDefences.AddResistence(PokemonTypes.bug);

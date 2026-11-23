@@ -29,7 +29,7 @@ public class Pikachu : BasePokemon
         coreStats.SetSpeed(30);
         level.SetCurrentLevel(1);
         level.SetMinimumLevel(1);
-        moveSet.SetAllMoves("Tackle", "Growl", "Work Up", "Thunder Shock");
+        moveSet.SetAllMoves(new Tackle(), new Growl(), new WorkUp(), new Thundershock());
         mainType.SetPokemonType(PokemonTypes.electric);
         subType.SetPokemonType(PokemonTypes.typeless);
         typeDefences.AddResistence(PokemonTypes.electric);
